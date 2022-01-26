@@ -12,10 +12,13 @@ const firebaseConfig = {
   messagingSenderId: "187624919709",
   appId: "1:187624919709:web:49b3de8e6b02bf0ac0ba74"
 };
-
+console.log("initializing app")
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+console.log("app initialized")
+
+export { app };
 
 // Import the functions you need from the SDKs you need
 // import * as firebase from "firebase";
@@ -41,5 +44,3 @@ const app = initializeApp(firebaseConfig);
 // }
 
 // const auth = firebase.auth()
-
-// export { auth };
