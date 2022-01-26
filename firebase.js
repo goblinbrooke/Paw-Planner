@@ -13,8 +13,10 @@ const firebaseConfig = {
   appId: "1:187624919709:web:49b3de8e6b02bf0ac0ba74"
 };
 
+console.log("initializing app")
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+console.log("app initialized")
 
 
 // Import the functions you need from the SDKs you need
@@ -42,4 +44,4 @@ const app = initializeApp(firebaseConfig);
 
 // const auth = firebase.auth()
 
-// export { auth };
+export { app };
