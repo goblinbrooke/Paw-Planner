@@ -77,7 +77,6 @@ const LoginScreen = () => {
           >
             <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        </View>
         
         {/* Register Button */}
         <TouchableOpacity
@@ -85,7 +84,8 @@ const LoginScreen = () => {
           style={[styles.button, styles.buttonOutline]}
           >
             <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity> 
+        </TouchableOpacity>
+        </View>
 
         {/* Google Login Button */}
         <GoogleLogin />
