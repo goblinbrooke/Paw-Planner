@@ -13,7 +13,6 @@ import {
 function PetsListScreen(props) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  console.log("data: ", data);
 
   const handlePets = async () => {
     console.log("in the handlePets function");
