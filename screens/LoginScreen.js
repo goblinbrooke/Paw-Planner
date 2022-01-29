@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-// import auth from '@react-native-firebase/auth';
+
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -12,12 +12,8 @@ const LoginScreen = () => {
 
   useEffect(() => {
     const auth = getAuth();
-    console.log(auth);
-    console.log("-------")
     const unsubscribe = auth.onAuthStateChanged(function (user) {
       if (user) {
-        console.log("we are here")
-        console.log(user)
         navigation.replace("Home")
       }
     })
@@ -73,6 +69,7 @@ const LoginScreen = () => {
         />
       </View>
       
+      {/* Login Button */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
@@ -80,13 +77,18 @@ const LoginScreen = () => {
           >
             <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        </View>
+        
+        {/* Register Button */}
         <TouchableOpacity
           onPress={handleSignup}
           style={[styles.button, styles.buttonOutline]}
           >
             <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>    
-      </View>
+        </TouchableOpacity> 
+
+        {/* Google Login Button */}
+        <GoogleLogin />
     </KeyboardAvoidingView>
   );
 }
@@ -136,6 +138,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 16,
   }
-})
+});
 
 export default LoginScreen;

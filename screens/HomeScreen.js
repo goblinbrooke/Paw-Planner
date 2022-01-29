@@ -15,6 +15,7 @@ const HomeScreen = () => {
       .catch(error => alert(error.message))
 }
   const auth = getAuth();
+  
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
