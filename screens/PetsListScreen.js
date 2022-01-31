@@ -14,33 +14,38 @@ function PetsListScreen(props) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const petsDB =
+    "https://firestore.googleapis.com/v1/projects/paw-planner/databases/(default)/documents/pets";
+
   const handlePets = async () => {
     console.log("in the handlePets function");
     try {
-      const response = await fetch(
-        "https://paw-planner-default-rtdb.firebaseio.com/pets.json"
-      );
-      console.log("resonse: ", response);
+      // console.log("in the try block");
+      const response = await fetch(petsDB);
       const json = await response.json();
-      return json.pets;
+      setData(json);
     } catch (error) {
       console.log("There is an error!");
       console.error(error);
     } finally {
       setLoading(false);
     }
-    console.log("at the end of the function");
   };
-
-  // const [people, setPeople] = useState([
-  //   { name: "Mariah", id: 1, photo: null },
-  //   { name: "Brooke", id: 2, photo: null },
-  //   { name: "Boney", id: 3, photo: null },
-  // ]);
 
   useEffect(() => {
     handlePets();
   }, []);
+
+  const petList = () => {
+    let petNames = [];
+    let i = 1;
+    for (let document of data.documents) {
+      let name = document.fields.name.stringValue;
+      petNames.push({ id: i, name: name });
+      i += 1;
+    }
+    return petNames;
+  };
 
   return (
     <View style={styles.container}>
@@ -49,7 +54,7 @@ function PetsListScreen(props) {
       ) : (
         <FlatList
           keyExtractor={(item) => item.id}
-          data={data}
+          data={petList(data)}
           renderItem={({ item }) => (
             <Text style={styles.item}>{item.name}</Text>
           )}
@@ -74,5 +79,6 @@ const styles = StyleSheet.create({
     padding: 30,
     backgroundColor: "#0782F9",
     fontSize: 24,
+    color: "white",
   },
 });
