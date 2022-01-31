@@ -20,6 +20,7 @@ export default function App() {
           component={LoginScreen}
         />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="PetsList" component={PetsListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
