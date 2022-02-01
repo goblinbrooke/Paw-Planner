@@ -7,6 +7,7 @@ import HomeScreen from "./screens/HomeScreen";
 // import GoogleLogin from "./screens/GoogleLogin";
 import { app } from "./firebase.js";
 import PetsListScreen from "./screens/PetsListScreen";
+import NewPetForm from "./screens/NewPetForm";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function App() {
           component={LoginScreen}
         />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="NewPet" component={NewPetForm} />
       </Stack.Navigator>
     </NavigationContainer>
   );

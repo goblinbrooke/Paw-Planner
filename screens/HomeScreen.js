@@ -12,12 +12,26 @@ const HomeScreen = () => {
       .then(() => {
         navigation.replace("Login");
       })
-      .catch(error => alert(error.message))
+      .catch((error) => alert(error.message));
   };
+
+  auth = getAuth();
 
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("PetsList")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Pets list</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("NewPet")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Add a pet</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
