@@ -22,6 +22,7 @@ export default function App() {
         />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="NewPet" component={NewPetForm} />
+        <Stack.Screen name="PetsList" component={PetsListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
