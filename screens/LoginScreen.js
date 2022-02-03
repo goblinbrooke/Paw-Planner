@@ -79,34 +79,31 @@ const LoginScreen = () => {
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          style={styles.input}
+          style={[styles.input, styles.buttonOutlinePink]}
         />
         <TextInput
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
-          style={styles.input}
+          style={[styles.input, styles.buttonOutlinePink]}
           secureTextEntry
         />
       </View>
 
       {/* Login Button */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
+        <TouchableOpacity onPress={handleLogin} style={[styles.button, styles.buttonOutlineWhite]}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         {/* Register Button */}
         <TouchableOpacity
           onPress={handleSignup}
-          style={[styles.button, styles.buttonOutline]}
+          style={[styles.button, styles.buttonOutlinePink]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Google Login Button */}
-      {/* <GoogleLogin /> */}
     </KeyboardAvoidingView>
   );
 };
@@ -116,6 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
+    backgroundColor: "rgb(253, 226, 228)",
   },
   inputContainer: {
     width: "80%",
@@ -134,7 +132,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "rgb(250, 210, 225)",
     width: "100%",
     padding: 15,
     borderRadius: 10,
@@ -145,14 +143,19 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-  buttonOutline: {
+  buttonOutlinePink: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
+    borderColor: "rgb(250, 210, 225)",
+    borderWidth: 2,
+  },
+  buttonOutlineWhite: {
+    marginTop: 5,
+    borderColor: "white",
     borderWidth: 2,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: "rgb(250, 210, 225)",
     fontWeight: "700",
     fontSize: 16,
   },
