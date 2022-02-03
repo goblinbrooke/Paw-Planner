@@ -19,21 +19,21 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Email: {auth.currentUser?.email}</Text>
+      <Text>Logged in: {auth.currentUser?.email}</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("PetsList")}
-        style={styles.button}
+        style={[styles.button, styles.buttonOutlinePurple]}
       >
-        <Text style={styles.buttonText}>Pets list</Text>
+        <Text style={styles.buttonText}>My pets</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("NewPet")}
-        style={styles.button}
+        style={[styles.button, styles.buttonOutlinePurple]}
       >
         <Text style={styles.buttonText}>Add a pet</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-        <Text style={styles.buttonText}>Sign out</Text>
+      <TouchableOpacity onPress={handleSignOut} style={[styles.buttonLogout, styles.buttonOutlineWhite]}>
+        <Text style={styles.buttonTextLogout}>Logout</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,9 +46,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgb(223, 231, 253)",
+  },
+  buttonLogout: {
+    backgroundColor: "rgb(205, 218, 253)",
+    width: "60%",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "white",
     width: "60%",
     padding: 15,
     borderRadius: 10,
@@ -56,8 +65,23 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   buttonText: {
+    color: "rgb(205, 218, 253)",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  buttonTextLogout: {
     color: "white",
     fontWeight: "700",
     fontSize: 16,
   },
+  buttonOutlineWhite: {
+    marginTop: 5,
+    borderColor: "white",
+    borderWidth: 2,
+},
+buttonOutlinePurple: {
+    marginTop: 5,
+    borderColor: "rgb(205, 218, 253)",
+    borderWidth: 2,
+}
 });
