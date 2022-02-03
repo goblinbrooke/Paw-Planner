@@ -36,6 +36,7 @@ const LoginScreen = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        userData(user);
         console.log("Registered with:", user.email);
         // ...
       })
@@ -53,9 +54,22 @@ const LoginScreen = () => {
         // Signed in
         const user = userCredential.user;
         console.log("Logged in with:", user.email);
-        // ...
       })
       .catch((error) => alert(error.message));
+  };
+
+  const userData = (user) => {
+    fetch("https://paw-planner-default-rtdb.firebaseio.com/user.json", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        pets: [],
+      }),
+    });
   };
 
   return (
