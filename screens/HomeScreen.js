@@ -26,6 +26,12 @@ const HomeScreen = () => {
       >
         <Text style={styles.buttonText}>Pets list</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("NewPet")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Add a pet</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
