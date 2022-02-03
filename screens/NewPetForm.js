@@ -1,31 +1,34 @@
 import React from "react";
-import { SafeAreaView, TouchableOpacity, TextInputField } from "react-native";
+import { SafeAreaView, Button, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
 const NewPetForm = () => {
   const {
-    register,
+    control,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, isValid },
+  } = useForm({ mode: "onBlur" });
+
   const onSubmit = (data) => console.log(data);
 
-  console.log(watch("example")); // watch input value by passing the name of it
-
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <input defaultValue="test" {...register("example")} />
-
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("exampleRequired", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
-
-      <input type="submit" />
-    </form>
+    <SafeAreaView>
+      <Controller
+        control={control}
+        name="name"
+        render={({ field: { onChange, value, onBlur } }) => (
+          <TextInput
+            iconName="person"
+            iconType="MaterialIcons"
+            placeholder="Enter your name here"
+            value={value}
+            onBlur={onBlur}
+            onChangeText={(value) => onChange(value)}
+          />
+        )}
+      />
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+    </SafeAreaView>
   );
 };
 
