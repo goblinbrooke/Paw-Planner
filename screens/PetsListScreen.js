@@ -15,7 +15,7 @@ function PetsListScreen(props) {
   const [data, setData] = useState([]);
 
   const petsDB =
-    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets";
+    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json";
 
   const handlePets = async () => {
     console.log("in the handlePets function");
@@ -23,6 +23,7 @@ function PetsListScreen(props) {
       // console.log("in the try block");
       const response = await fetch(petsDB);
       const json = await response.json();
+      console.log(json);
       setData(json);
     } catch (error) {
       console.log("There is an error!");
