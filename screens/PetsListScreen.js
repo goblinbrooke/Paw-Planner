@@ -14,7 +14,8 @@ function PetsListScreen(props) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const petsDB = "https://paw-planner-default-rtdb.firebaseio.com/pets.json";
+  const petsDB =
+    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets";
 
   const handlePets = async () => {
     console.log("in the handlePets function");
