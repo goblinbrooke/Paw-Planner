@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {
-  SafeAreaView,
+  ScrollView,
   Button,
   TextInput,
   StyleSheet,
   Text,
+  View,
+  Switch,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const NewPetForm = () => {
+  // state variables
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const {
     control,
     handleSubmit,
@@ -33,39 +40,165 @@ const NewPetForm = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Add a new pet!</Text>
-      <Controller
-        control={control}
-        name="name"
-        render={({ field: { onChange, value, onBlur } }) => (
-          <TextInput
-            style={styles.input}
-            iconName="person"
-            iconType="MaterialIcons"
-            placeholder="Enter pet name"
-            value={value}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
+      <ScrollView>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              iconName="person"
+              iconType="MaterialIcons"
+              placeholder="Enter pet name"
+              value={value}
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="age"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet age"
+              keyboardType="numeric"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="birthday"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              autoComplete="birthdate-day"
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet birthday"
+            />
+          )}
+        />
+        <View>
+          <Text>Pet species</Text>
+          <Controller
+            control={control}
+            name="cat"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <BouncyCheckbox
+                textComponent={<Text> cat</Text>}
+                onPress={(isChecked = boolean) => {}}
+              />
+            )}
           />
-        )}
-      />
-      <Controller
-        control={control}
-        name="age"
-        render={({ field: { onChange, value, onBlur } }) => (
-          <TextInput
-            style={styles.input}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            placeholder="Enter pet age"
-            keyboardType="numeric"
+          <Controller
+            control={control}
+            name="dog"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <BouncyCheckbox
+                textComponent={<Text> dog</Text>}
+                onPress={(isChecked = boolean) => {}}
+              />
+            )}
           />
-        )}
-      />
-      <Button
-        style={[styles.button, styles.buttonText]}
-        title="Submit"
-        onPress={handleSubmit(onSubmit)}
-      />
+          <Controller
+            control={control}
+            name="bird"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <BouncyCheckbox
+                textComponent={<Text> bird</Text>}
+                onPress={(isChecked = boolean) => {}}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="small rodent"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <BouncyCheckbox
+                textComponent={<Text> small rodent</Text>}
+                onPress={(isChecked = boolean) => {}}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="fish"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <BouncyCheckbox
+                textComponent={<Text> fish</Text>}
+                onPress={(isChecked = boolean) => {}}
+              />
+            )}
+          />
+        </View>
+        <Controller
+          control={control}
+          name="breed"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet breed"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="coloring"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet coloring"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="microchip"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet microchip number"
+              keyboardType="numeric"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="dietary needs"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet dietary needs"
+            />
+          )}
+        />
+        {/* <View>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View> */}
+        <Button
+          style={[styles.button, styles.buttonText]}
+          title="Submit"
+          onPress={handleSubmit(onSubmit)}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };
