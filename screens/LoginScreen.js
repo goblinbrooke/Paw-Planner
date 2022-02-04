@@ -1,18 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from "react-native";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -60,6 +50,19 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      {/* Logo */}
+      <SafeAreaView style={styles.logoContainer}>
+      <View> 
+        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+      </View>
+      </SafeAreaView>
+
+      {/* App Name */}
+      <View style={styles.appNameContainer}>
+        <Text style={styles.appName}>Paw Planner</Text>
+      </View>
+
+      {/* Email and Password Input */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -95,6 +98,17 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  appNameContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  appName: {
+    fontSize: 70,
+    fontWeight: "700",
+    color: "rgb(205, 218, 253)",
+    fontFamily: "PinkButterfly",
+  },
   container: {
     justifyContent: "center",
     alignItems: "center",
@@ -123,6 +137,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
+    marginBottom: 10,
   },
   buttonText: {
     color: "white",
@@ -144,6 +159,18 @@ const styles = StyleSheet.create({
     color: "rgb(250, 210, 225)",
     fontWeight: "700",
     fontSize: 16,
+  },
+  logoContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logo: {
+    flex: 1,
+    width: 300,
+    height: 200,
+    marginTop: 20,
+    resizeMode: 'contain' 
   },
 });
 
