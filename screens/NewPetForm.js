@@ -11,18 +11,23 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { SafeAreaView } from "react-native-safe-area-context";
+import UploadImage from "./UploadImage";
 
 const NewPetForm = () => {
   // state variables
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  // const [isEnabled, setIsEnabled] = useState(false);
+  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    reset,
+    formState: { errors, isValid, isSubmitSuccessful },
   } = useForm({ mode: "onBlur" });
 
+  const [image, setImage] = useState(null);
+
   const onSubmit = (data) => {
+    const newData = { ...data, image };
     fetch(
       "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json",
       {
@@ -31,16 +36,18 @@ const NewPetForm = () => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(newData),
       }
     );
-    console.log(data);
+    reset();
+    setImage(null);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Add a new pet!</Text>
       <ScrollView>
+        <UploadImage image={image} setImage={setImage} />
         <Controller
           control={control}
           name="name"
