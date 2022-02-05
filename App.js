@@ -8,6 +8,7 @@ import HomeScreen from "./screens/HomeScreen";
 import { app } from "./firebase.js";
 import PetsListScreen from "./screens/PetsListScreen";
 import NewPetForm from "./screens/NewPetForm";
+import UploadImage from "./screens/UploadImage";
 
 const Stack = createNativeStackNavigator();
 
