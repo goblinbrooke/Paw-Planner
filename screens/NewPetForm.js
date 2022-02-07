@@ -15,8 +15,6 @@ import UploadImage from "./UploadImage";
 
 const NewPetForm = () => {
   // state variables
-  // const [isEnabled, setIsEnabled] = useState(false);
-  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const {
     control,
     handleSubmit,
@@ -26,8 +24,10 @@ const NewPetForm = () => {
 
   const [image, setImage] = useState(null);
 
+  const [species, setSpecies] = useState(null);
+
   const onSubmit = (data) => {
-    const newData = { ...data, image };
+    const newData = { ...data, image, species };
     fetch(
       "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json",
       {
@@ -41,6 +41,7 @@ const NewPetForm = () => {
     );
     reset();
     setImage(null);
+    setSpecies(null);
   };
 
   return (
@@ -91,55 +92,40 @@ const NewPetForm = () => {
         />
         <View>
           <Text>Pet species</Text>
-          <Controller
-            control={control}
-            name="cat"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <BouncyCheckbox
-                textComponent={<Text> cat</Text>}
-                onPress={(isChecked = boolean) => {}}
-              />
-            )}
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> cat</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("cat");
+            }}
           />
-          <Controller
-            control={control}
-            name="dog"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <BouncyCheckbox
-                textComponent={<Text> dog</Text>}
-                onPress={(isChecked = boolean) => {}}
-              />
-            )}
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> dog</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("dog");
+            }}
           />
-          <Controller
-            control={control}
-            name="bird"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <BouncyCheckbox
-                textComponent={<Text> bird</Text>}
-                onPress={(isChecked = boolean) => {}}
-              />
-            )}
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> bird</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("bird");
+            }}
           />
-          <Controller
-            control={control}
-            name="small rodent"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <BouncyCheckbox
-                textComponent={<Text> small rodent</Text>}
-                onPress={(isChecked = boolean) => {}}
-              />
-            )}
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> small rodent</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("small rodent");
+            }}
           />
-          <Controller
-            control={control}
-            name="fish"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <BouncyCheckbox
-                textComponent={<Text> fish</Text>}
-                onPress={(isChecked = boolean) => {}}
-              />
-            )}
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> fish</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("fish");
+            }}
           />
         </View>
         <Controller
