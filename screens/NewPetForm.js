@@ -8,6 +8,8 @@ import {
   Text,
   View,
   Switch,
+  Modal,
+  Pressable,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -26,6 +28,18 @@ const NewPetForm = () => {
 
   const [species, setSpecies] = useState(null);
 
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+
+    if (isModalVisible === false) {
+      reset();
+      setImage(null);
+      setSpecies(null);
+    }
+  };
+
   const onSubmit = (data) => {
     const newData = { ...data, image, species };
     fetch(
@@ -39,9 +53,7 @@ const NewPetForm = () => {
         body: JSON.stringify(newData),
       }
     );
-    reset();
-    setImage(null);
-    setSpecies(null);
+    toggleModal();
   };
 
   return (
@@ -191,6 +203,27 @@ const NewPetForm = () => {
           title="Submit"
           onPress={handleSubmit(onSubmit)}
         />
+
+        {/* popup for successfully submitted form */}
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={isModalVisible}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Pet created!</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={toggleModal}
+                >
+                  <Text style={styles.textStyle}>Exit</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -199,6 +232,47 @@ const NewPetForm = () => {
 export default NewPetForm;
 
 const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
   container: {
     flex: 1,
     paddingTop: 40,
