@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     fontSize: 70,
     fontWeight: "700",
     color: "rgb(205, 218, 253)",
-    fontFamily: "PinkButterfly",
+    fontFamily: "Avenir",
   },
   container: {
     justifyContent: "center",

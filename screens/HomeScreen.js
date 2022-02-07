@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, SafeAreaView, Image } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 
 const HomeScreen = () => {
@@ -14,26 +14,45 @@ const HomeScreen = () => {
       })
       .catch((error) => alert(error.message));
   };
+  const handleLogoClicked = () => {
+    navigation.replace("HomeScreen");
+  };
 
   auth = getAuth();
 
   return (
     <View style={styles.container}>
-      <Text>Logged in: {auth.currentUser?.email}</Text>
+      <Text style={styles.text}>🌸 Welcome to Pet Central! Manage and add your pets here. 🌸</Text>
+
+      {/* My pets button */}
       <TouchableOpacity
         onPress={() => navigation.navigate("PetsList")}
         style={[styles.button, styles.buttonOutlinePurple]}
       >
-        <Text style={styles.buttonText}>My pets</Text>
+        <Text style={styles.buttonText}>🐾 My pets 🐾</Text>
       </TouchableOpacity>
+
+      {/* Add a pet button */}
       <TouchableOpacity
         onPress={() => navigation.navigate("NewPet")}
         style={[styles.button, styles.buttonOutlinePurple]}
       >
-        <Text style={styles.buttonText}>Add a pet</Text>
+        <Text style={styles.buttonText}>😸 Add a pet 😸</Text>
       </TouchableOpacity>
+
+      {/* Logout button */}
       <TouchableOpacity onPress={handleSignOut} style={[styles.buttonLogout, styles.buttonOutlineWhite]}>
         <Text style={styles.buttonTextLogout}>Logout</Text>
+      </TouchableOpacity>
+
+      {/* Currently logged in */}
+      <Text style={styles.textStyle}>Currently logged in: 💗{auth.currentUser?.email}</Text>
+      
+      {/* Logo */}
+      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
+      <View> 
+        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+      </View>
       </TouchableOpacity>
     </View>
   );
@@ -83,5 +102,34 @@ buttonOutlinePurple: {
     marginTop: 5,
     borderColor: "rgb(205, 218, 253)",
     borderWidth: 2,
-}
+},
+  text: {
+    fontSize: 50,
+    fontWeight: "700",
+    color: "black",
+    fontFamily: "Avenir",
+    marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+textStyle: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "black",
+    fontFamily: "Avenir",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logoContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logo: {
+    flex: 1,
+    width: 50,
+    height: 50,
+    marginTop: 20,
+    resizeMode: 'contain' 
+  },
 });
