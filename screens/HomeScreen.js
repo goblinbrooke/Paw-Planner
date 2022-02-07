@@ -14,6 +14,9 @@ const HomeScreen = () => {
       })
       .catch((error) => alert(error.message));
   };
+  const handleLogoClicked = () => {
+    navigation.replace("HomeScreen");
+  };
 
   auth = getAuth();
 
@@ -43,14 +46,14 @@ const HomeScreen = () => {
       </TouchableOpacity>
 
       {/* Currently logged in */}
-      <Text style={styles.textStyle}>Currently viewing the fur children of: 💗{auth.currentUser?.email}</Text>
+      <Text style={styles.textStyle}>Currently logged in: 💗{auth.currentUser?.email}</Text>
       
       {/* Logo */}
-      <SafeAreaView style={styles.logoContainer}>
+      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
       <View> 
         <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
       </View>
-      </SafeAreaView>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -101,11 +104,13 @@ buttonOutlinePurple: {
     borderWidth: 2,
 },
   text: {
-    fontSize: 100,
+    fontSize: 50,
     fontWeight: "700",
-    color: "rgb(205, 218, 253)",
+    color: "black",
     fontFamily: "Avenir",
     marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
 textStyle: {
     fontSize: 20,
