@@ -3,8 +3,7 @@ import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
-import storage from "@react-native-firebase/storage";
-import { utils } from "@react-native-firebase/app";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 export default function UploadImage(props) {
   const addImage = async () => {
@@ -19,7 +18,6 @@ export default function UploadImage(props) {
 
     if (!_image.cancelled) {
       props.setImage(_image.uri);
-      const reference = storage().ref(_image);
       // postImageUrl(_image.uri);
     }
   };
@@ -33,9 +31,19 @@ export default function UploadImage(props) {
     }
   };
 
-  const postImage = async (image) => {
-    const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/images`;
-    await reference.putFile(pathToFile);
+  const postImage = async () => {
+    const reference = storage().ref("petimage.png");
+
+    const storage = getStorage();
+    const storageRef = ref(storage, "some-child");
+
+    // 'file' comes from the Blob or File API
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
+
+    // const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/petimage.png`;
+    // await reference.putFile(pathToFile);
   };
 
   // const postImageUrl = (_image) => {
