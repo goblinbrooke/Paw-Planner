@@ -30,6 +30,7 @@ const NewPetForm = () => {
 
   const [isModalVisible, setModalVisible] = useState(false);
 
+  // helper functions
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
 

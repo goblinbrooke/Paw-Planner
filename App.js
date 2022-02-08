@@ -14,19 +14,19 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <PetScreen />
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen
-    //       options={{ headerShown: false }}
-    //       name="Login"
-    //       component={LoginScreen}
-    //     />
-    //     <Stack.Screen name="Home" component={HomeScreen} />
-    //     <Stack.Screen name="NewPet" component={NewPetForm} />
-    //     <Stack.Screen name="PetsList" component={PetsListScreen} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    // <PetScreen />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Login"
+          component={LoginScreen}
+        />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="NewPet" component={NewPetForm} />
+        <Stack.Screen name="PetsList" component={PetsListScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

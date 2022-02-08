@@ -1,6 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View, SafeAreaView, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  SafeAreaView,
+  Image,
+} from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 
 const HomeScreen = () => {
@@ -22,7 +29,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>🌸 Welcome to Pet Central! Manage and add your pets here. 🌸</Text>
+      <Text style={styles.text}>
+        🌸 Welcome to Pet Central! Manage and add your pets here. 🌸
+      </Text>
 
       {/* My pets button */}
       <TouchableOpacity
@@ -41,18 +50,29 @@ const HomeScreen = () => {
       </TouchableOpacity>
 
       {/* Logout button */}
-      <TouchableOpacity onPress={handleSignOut} style={[styles.buttonLogout, styles.buttonOutlineWhite]}>
+      <TouchableOpacity
+        onPress={handleSignOut}
+        style={[styles.buttonLogout, styles.buttonOutlineWhite]}
+      >
         <Text style={styles.buttonTextLogout}>Logout</Text>
       </TouchableOpacity>
 
       {/* Currently logged in */}
-      <Text style={styles.textStyle}>Currently logged in: 💗{auth.currentUser?.email}</Text>
-      
+      <Text style={styles.textStyle}>
+        Currently logged in: 💗{auth.currentUser?.email}
+      </Text>
+
       {/* Logo */}
-      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
-      <View> 
-        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
-      </View>
+      <TouchableOpacity
+        onPress={handleLogoClicked}
+        style={styles.logoContainer}
+      >
+        <View>
+          <Image
+            source={require("../assets/Illustration4.png")}
+            style={styles.logo}
+          />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -97,26 +117,26 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderColor: "white",
     borderWidth: 2,
-},
-buttonOutlinePurple: {
+  },
+  buttonOutlinePurple: {
     marginTop: 5,
     borderColor: "rgb(205, 218, 253)",
     borderWidth: 2,
-},
+  },
   text: {
     fontSize: 50,
     fontWeight: "700",
     color: "black",
-    fontFamily: "Avenir",
+    // fontFamily: "Avenir",
     marginTop: 20,
     alignItems: "center",
     justifyContent: "center",
   },
-textStyle: {
+  textStyle: {
     fontSize: 20,
     fontWeight: "700",
     color: "black",
-    fontFamily: "Avenir",
+    // fontFamily: "Avenir",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -130,6 +150,6 @@ textStyle: {
     width: 50,
     height: 50,
     marginTop: 20,
-    resizeMode: 'contain' 
+    resizeMode: "contain",
   },
 });
