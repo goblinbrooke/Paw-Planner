@@ -61,9 +61,14 @@ const NewPetForm = () => {
     toggleModal();
   };
 
+  const navigation = useNavigation();
+  const handleLogoClicked = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Add a new pet!</Text>
+      <Text style={styles.addtext}>🐾 Add a new fur baby! 🐾</Text>
       <ScrollView>
         <UploadImage image={image} setImage={setImage} />
         <Controller
@@ -204,7 +209,7 @@ const NewPetForm = () => {
         />
       </View> */}
         <Button
-          style={[styles.button, styles.buttonText]}
+          style={[styles.submitButton, styles.submitButtonOutline]}
           title="Submit"
           onPress={handleSubmit(onSubmit)}
         />
@@ -218,7 +223,7 @@ const NewPetForm = () => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Pet created!</Text>
+                <Text style={styles.modalText}>Fur baby added! 💗</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={toggleModal}
@@ -231,9 +236,10 @@ const NewPetForm = () => {
         </View>
 
       {/* Logo */}
-      <TouchableOpacity style={styles.logoContainer}>
+      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
       <View> 
         <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+        <Text style={styles.logoText}>💗HOME💗</Text>
       </View>
       </TouchableOpacity>
       
@@ -270,12 +276,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    alignItems: "center",
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "rgb(190, 225, 230)",
   },
   textStyle: {
     color: "white",
@@ -298,12 +305,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
-  text: {
+  addtext: {
     color: "black",
     fontWeight: "700",
-    fontSize: 16,
-    justifyContent: "center",
-    alignItems: "center",
+    fontSize: 26,
+    textAlign: "center",
+    marginBottom: 20,
   },
   logoContainer: {
     flex: 1,
@@ -314,7 +321,28 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginTop: 20,
-    marginBottom: 20,
     resizeMode: 'contain' 
   },
+  logoText: {
+    fontSize: 10,
+    fontWeight: "bold",
+    color: "black",
+    alignItems: "flex-end",
+    marginBottom: 20,
+  },
+  submitButton: {
+    backgroundColor: "rgb(190, 225, 230)",
+    width: "60%",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 40,
+  },
+  submitButtonOutline: {
+    marginTop: 5,
+    borderColor: "white",
+    borderWidth: 2,
+    marginBottom: 50,
+  },
+
 });

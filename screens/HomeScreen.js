@@ -17,13 +17,8 @@ const HomeScreen = () => {
       })
       .catch((error) => alert(error.message));
   };
-  const handleLogoClicked = () => {
-    navigation.replace("HomeScreen");
-  };
 
   auth = getAuth();
-  
-  const Tab = createBottomTabNavigator();
 
   return (
     <View style={styles.container}>
@@ -116,8 +111,9 @@ buttonOutlinePurple: {
     fontFamily: "Avenir",
     marginTop: 20,
     marginBottom: 50,
-    alignItems: "center",
-    justifyContent: "center",
+    textAlign: "center",
+    backgroundColor: "white",
+    borderRadius: 10,
   },
 textStyle: {
     fontSize: 20,

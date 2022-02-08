@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigation, NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Tabs from "./tabs";
+import { useNavigation } from "@react-navigation/native";
 import HomeScreen from "./HomeScreen";
 import {
   View,
@@ -41,7 +39,7 @@ function PetsListScreen(props) {
   
   const navigation = useNavigation();
   const handleLogoClicked = () => {
-    navigation.replace("HomeScreen");
+    navigation.navigate("Home");
   };
 
   useEffect(() => {
@@ -79,6 +77,7 @@ function PetsListScreen(props) {
       <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
         <View>
           <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+          <Text style={styles.logoText}>💗HOME💗</Text>
         </View>
       </TouchableOpacity>
 
@@ -101,6 +100,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     padding: 30,
     backgroundColor: "rgb(190, 225, 230)",
+    borderRadius: 20,
     fontSize: 24,
     color: "white",
   },
@@ -110,20 +110,28 @@ const styles = StyleSheet.create({
   },
   logo: {
     flex: 1,
-    width: 50,
-    height: 50,
     marginTop: 20,
     marginBottom: 20,
-    resizeMode: 'contain', 
-    left: 150,
+    left: 130,
+    resizeMode: "contain",
+
+  },
+  logoText: {
+    fontSize: 10,
+    fontWeight: "bold",
+    color: "black",
+    left: 300,
+    marginBottom: 20,
   },
   textStyle: {
     fontSize: 20,
     fontWeight: "700",
     color: "black",
     fontFamily: "Avenir",
-    justifyContent: "center",
-    alignItems: "center",
+    textAlign: "center",
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
   },
   text: {
     color: "black",
