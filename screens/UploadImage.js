@@ -12,10 +12,6 @@ import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
 
 export default function UploadImage(props) {
-  useEffect(() => {
-    checkForCameraRollPermission();
-  }, []);
-
   const addImage = async () => {
     let _image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -34,9 +30,7 @@ export default function UploadImage(props) {
   const checkForCameraRollPermission = async () => {
     const { status } = await ImagePicker.getMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      alert(
-        "Please grant camera roll permissions inside your system's settings"
-      );
+      alert("Allow Paw Planner access to your camera roll?");
     } else {
       console.log("Media Permissions are granted");
     }
@@ -53,7 +47,7 @@ export default function UploadImage(props) {
 
       <View style={imageUploaderStyles.uploadBtnContainer}>
         <TouchableOpacity
-          onPress={addImage}
+          onPress={(checkForCameraRollPermission, addImage)}
           style={imageUploaderStyles.uploadBtn}
         >
           <Text>{props.image ? "Edit" : "Upload"} Image</Text>
