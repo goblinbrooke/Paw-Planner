@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigation, NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Tabs from "./tabs";
+import HomeScreen from "./HomeScreen";
 import {
   View,
   FlatList,
@@ -7,7 +11,7 @@ import {
   Text,
   ActivityIndicator,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
 
 function PetsListScreen(props) {
@@ -35,6 +39,7 @@ function PetsListScreen(props) {
     }
   };
   
+  const navigation = useNavigation();
   const handleLogoClicked = () => {
     navigation.replace("HomeScreen");
   };
@@ -42,7 +47,7 @@ function PetsListScreen(props) {
   useEffect(() => {
     handlePets();
   }, []);
-
+        
   const dataList = (data) => {
     const petData = [];
     for (let pet in data) {
@@ -50,6 +55,7 @@ function PetsListScreen(props) {
     }
     return petData;
   };
+
 
   return (
     <View style={styles.container}>
@@ -71,9 +77,9 @@ function PetsListScreen(props) {
       
       {/* Logo */}
       <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
-      <View>
-        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
-      </View>
+        <View>
+          <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+        </View>
       </TouchableOpacity>
 
     </View>
@@ -88,8 +94,8 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 20,
     backgroundColor: "rgb(226, 236, 233)",
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   item: {
     marginTop: 24,
@@ -100,21 +106,29 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-end",
   },
   logo: {
     flex: 1,
     width: 50,
     height: 50,
     marginTop: 20,
-    resizeMode: 'contain' 
+    marginBottom: 20,
+    resizeMode: 'contain', 
+    left: 150,
   },
   textStyle: {
     fontSize: 20,
     fontWeight: "700",
     color: "black",
     fontFamily: "Avenir",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    color: "black",
+    fontWeight: "700",
+    fontSize: 16,
     justifyContent: "center",
     alignItems: "center",
   },

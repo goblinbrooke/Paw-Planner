@@ -2,6 +2,9 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, SafeAreaView, Image } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import Position from "react-native/Libraries/Components/Touchable/Position";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -19,10 +22,12 @@ const HomeScreen = () => {
   };
 
   auth = getAuth();
+  
+  const Tab = createBottomTabNavigator();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>🌸 Welcome to Pet Central! Manage and add your pets here. 🌸</Text>
+      <Text style={styles.text}>🌸 Welcome to Pet Central! Manage your fur children here. 🌸</Text>
 
       {/* My pets button */}
       <TouchableOpacity
@@ -49,7 +54,7 @@ const HomeScreen = () => {
       <Text style={styles.textStyle}>Currently logged in: 💗{auth.currentUser?.email}</Text>
       
       {/* Logo */}
-      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
+      <TouchableOpacity style={styles.logoContainer}>
       <View> 
         <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
       </View>
@@ -97,6 +102,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderColor: "white",
     borderWidth: 2,
+    marginBottom: 50,
 },
 buttonOutlinePurple: {
     marginTop: 5,
@@ -104,11 +110,12 @@ buttonOutlinePurple: {
     borderWidth: 2,
 },
   text: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: "700",
     color: "black",
     fontFamily: "Avenir",
     marginTop: 20,
+    marginBottom: 50,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -122,14 +129,14 @@ textStyle: {
   },
   logoContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-end",
   },
   logo: {
     flex: 1,
     width: 50,
     height: 50,
     marginTop: 20,
-    resizeMode: 'contain' 
+    resizeMode: 'contain', 
+    left: 150,
   },
 });

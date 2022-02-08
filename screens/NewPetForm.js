@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   ScrollView,
   Button,
@@ -8,6 +11,8 @@ import {
   Text,
   View,
   Switch,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -191,6 +196,13 @@ const NewPetForm = () => {
           title="Submit"
           onPress={handleSubmit(onSubmit)}
         />
+        
+        {/* Logo */}
+      <TouchableOpacity style={styles.logoContainer}>
+      <View> 
+        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+      </View>
+      </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -203,6 +215,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
     paddingHorizontal: 20,
+    backgroundColor: "rgb(226, 236, 233)",
   },
   input: {
     height: 40,
@@ -211,10 +224,22 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    color: "#0782F9",
+    color: "black",
     fontWeight: "700",
     fontSize: 16,
-    // justifyContent: "center",
-    // alignItems: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logoContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
+  logo: {
+    flex: 1,
+    width: 50,
+    height: 50,
+    marginTop: 20,
+    marginBottom: 20,
+    resizeMode: 'contain' 
   },
 });
