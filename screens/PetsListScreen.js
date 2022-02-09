@@ -65,8 +65,8 @@ function PetsListScreen(props) {
     <View style={styles.container}>
       {/* Currently logged in */}
       <Text style={styles.textStyle}>
-        Currently viewing the fur children of: 💗{auth.currentUser?.email}
-      </Text>
+        Currently viewing the fur children of: </Text>
+        <Text style={[styles.textStyle, styles.textBottom]}> 💗{auth.currentUser?.email} </Text>
 
       {isLoading ? (
         <ActivityIndicator />
@@ -129,9 +129,15 @@ const styles = StyleSheet.create({
   logo: {
     flex: 1,
     marginTop: 20,
-    marginBottom: 20,
     left: 130,
     resizeMode: "contain",
+    // 
+    // flex: 1,
+    // width: 50,
+    // height: 50,
+    // marginTop: 20,
+    // resizeMode: 'contain',
+    // left: 150,
   },
   logoText: {
     fontSize: 10,
@@ -144,11 +150,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     color: "black",
-    fontFamily: "Avenir",
+    // fontFamily: "normal",
     textAlign: "center",
     backgroundColor: "white",
     borderRadius: 20,
     padding: 10,
+    marginBottom: 20,
+  },
+  textBottom: {
+    marginBottom: 20,
   },
   text: {
     color: "black",
@@ -156,5 +166,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 20,
   },
 });

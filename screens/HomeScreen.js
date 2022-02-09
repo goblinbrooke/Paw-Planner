@@ -22,7 +22,8 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>🌸 Welcome to Pet Central! Manage your fur children here. 🌸</Text>
+      <Text style={styles.headerText}>🌸 Welcome to Pet Central!🌸</Text>
+      <Text style= {[styles.headerText, styles.headerSpace]}>Manage your fur children here.</Text>
 
       {/* My pets button */}
       <TouchableOpacity
@@ -46,7 +47,8 @@ const HomeScreen = () => {
       </TouchableOpacity>
 
       {/* Currently logged in */}
-      <Text style={styles.textStyle}>Currently logged in: 💗{auth.currentUser?.email}</Text>
+      <Text style={styles.textStyle}>Currently logged in: </Text>
+      <Text style={styles.textStyle}>💗{auth.currentUser?.email}</Text>
       
       {/* Logo */}
       <TouchableOpacity style={styles.logoContainer}>
@@ -97,31 +99,37 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderColor: "white",
     borderWidth: 2,
-    marginBottom: 50,
+    marginBottom: 30,
 },
 buttonOutlinePurple: {
     marginTop: 5,
     borderColor: "rgb(205, 218, 253)",
     borderWidth: 2,
 },
-  text: {
+  headerText: {
     fontSize: 40,
     fontWeight: "700",
     color: "black",
-    fontFamily: "Avenir",
+    // fontFamily: "sans-serif",
     marginTop: 20,
-    marginBottom: 50,
     textAlign: "center",
     backgroundColor: "white",
     borderRadius: 20,
   },
-textStyle: {
+  headerSpace: {
+    marginBottom: 20,
+  },
+  textStyle: {
     fontSize: 20,
     fontWeight: "700",
     color: "black",
-    fontFamily: "Avenir",
+    // fontFamily: "Avenir",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 10,
   },
   logoContainer: {
     flex: 1,

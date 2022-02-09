@@ -92,7 +92,7 @@ const NewPetForm = () => {
               style={styles.input}
               onChangeText={(value) => onChange(value)}
               value={value}
-              placeholder="Enter pet age"
+              placeholder="Enter pet's age"
               keyboardType="numeric"
             />
           )}
@@ -111,7 +111,7 @@ const NewPetForm = () => {
           )}
         />
         <View>
-          <Text>Pet species</Text>
+          <Text style={styles.petSpeciesText}>Pet species:</Text>
           <BouncyCheckbox
             fillColor="#BEE1E6"
             textComponent={<Text> cat</Text>}
@@ -289,6 +289,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  petSpeciesText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+  },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
@@ -311,6 +317,9 @@ const styles = StyleSheet.create({
     fontSize: 26,
     textAlign: "center",
     marginBottom: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
   },
   logoContainer: {
     flex: 1,
