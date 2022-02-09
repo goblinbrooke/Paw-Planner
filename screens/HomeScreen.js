@@ -113,7 +113,7 @@ buttonOutlinePurple: {
     marginBottom: 50,
     textAlign: "center",
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 20,
   },
 textStyle: {
     fontSize: 20,

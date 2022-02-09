@@ -31,7 +31,7 @@ function PetScreen(props) {
 
   return (
     <SafeAreaView>
-      <Button title="get-request" onPress={handlePet}>
+      <Button title="Pet info!" onPress={handlePet}>
         <Text>Run the get request</Text>
       </Button>
       {/* <Image source={require(data.image)} /> */}

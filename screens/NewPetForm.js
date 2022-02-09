@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import {
   ScrollView,
   Button,
@@ -79,7 +77,7 @@ const NewPetForm = () => {
               style={styles.input}
               iconName="person"
               iconType="MaterialIcons"
-              placeholder="Enter pet name"
+              placeholder="Enter pet's name"
               value={value}
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
@@ -108,7 +106,7 @@ const NewPetForm = () => {
               autoComplete="birthdate-day"
               onChangeText={(value) => onChange(value)}
               value={value}
-              placeholder="Enter pet birthday"
+              placeholder="Enter pet's birthday"
             />
           )}
         />
@@ -158,7 +156,7 @@ const NewPetForm = () => {
               style={styles.input}
               onChangeText={(value) => onChange(value)}
               value={value}
-              placeholder="Enter pet breed"
+              placeholder="Enter pet's breed"
             />
           )}
         />
@@ -170,7 +168,7 @@ const NewPetForm = () => {
               style={styles.input}
               onChangeText={(value) => onChange(value)}
               value={value}
-              placeholder="Enter pet coloring"
+              placeholder="Enter pet's coloring"
             />
           )}
         />
@@ -182,7 +180,7 @@ const NewPetForm = () => {
               style={styles.input}
               onChangeText={(value) => onChange(value)}
               value={value}
-              placeholder="Enter pet microchip number"
+              placeholder="Enter pet's microchip number"
               keyboardType="numeric"
             />
           )}
@@ -195,7 +193,7 @@ const NewPetForm = () => {
               style={styles.input}
               onChangeText={(value) => onChange(value)}
               value={value}
-              placeholder="Enter pet dietary needs"
+              placeholder="Enter pet's dietary needs"
             />
           )}
         />
