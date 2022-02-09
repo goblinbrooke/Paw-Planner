@@ -6,6 +6,7 @@ import {
   FlatList,
   StyleSheet,
   SafeAreaView,
+  Button,
   Text,
   ActivityIndicator,
   TouchableOpacity,
@@ -36,16 +37,17 @@ function PetsListScreen(props) {
       setLoading(false);
     }
   };
-  
+
   const navigation = useNavigation();
   const handleLogoClicked = () => {
+    console.log("button pressed");
     navigation.navigate("Home");
   };
 
   useEffect(() => {
     handlePets();
   }, []);
-        
+
   const dataList = (data) => {
     const petData = [];
     for (let pet in data) {
@@ -54,13 +56,18 @@ function PetsListScreen(props) {
     return petData;
   };
 
+  const handlePetClicked = () => {
+    console.log("button pressed");
+    navigation.replace("PetScreen");
+  };
 
   return (
     <View style={styles.container}>
-
       {/* Currently logged in */}
-      <Text style={styles.textStyle}>Currently viewing the fur children of: 💗{auth.currentUser?.email}</Text>
-      
+      <Text style={styles.textStyle}>
+        Currently viewing the fur children of: 💗{auth.currentUser?.email}
+      </Text>
+
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -68,19 +75,30 @@ function PetsListScreen(props) {
           keyExtractor={(item) => item.id}
           data={data}
           renderItem={({ item }) => (
-            <Text style={styles.item}>{item.name}</Text>
+            <Button
+              title={item.name}
+              style={styles.item}
+              onPress={handlePetClicked}
+            >
+              {item.name}
+            </Button>
           )}
         />
       )}
-      
+
       {/* Logo */}
-      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
+      <TouchableOpacity
+        onPress={handleLogoClicked}
+        style={styles.logoContainer}
+      >
         <View>
-          <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+          <Image
+            source={require("../assets/Illustration4.png")}
+            style={styles.logo}
+          />
           <Text style={styles.logoText}>💗HOME💗</Text>
         </View>
       </TouchableOpacity>
-
     </View>
   );
 }
@@ -93,8 +111,8 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 20,
     backgroundColor: "rgb(226, 236, 233)",
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   item: {
     marginTop: 24,
@@ -114,7 +132,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     left: 130,
     resizeMode: "contain",
-
   },
   logoText: {
     fontSize: 10,
