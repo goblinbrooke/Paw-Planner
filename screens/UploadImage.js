@@ -1,13 +1,115 @@
 import React, { useState, useEffect } from "react";
-import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import {
+  Image,
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Button,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
-// import { utils } from "@react-native-firebase/app";
-import storage from "firebase/storage";
+// import * as firebase from "firebase";
+// import { getStorage, ref } from "firebase/storage";
+import { firebaseConfig } from "../firebase";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 export default function UploadImage(props) {
+  // if (!Firebase.apps.length) {
+  //   Firebase.initializeApp(firebaseConfig);
+
+  const [uploading, setUploading] = useState(false);
+
+  const [imageToUpload, setImageToUpload] = useState();
+  useEffect(() => {
+    async function uploadCode() {
+      if (!imageToUpload) {
+        return;
+      }
+      console.log("2");
+      // Implement a new Blob promise with XMLHTTPRequest
+      console.log("3");
+      // Create a ref in Firebase (I'm using my user's ID)
+      console.log(typeof getStorage);
+      // const storage = firebase.storage();
+      const storage = getStorage();
+      console.log(typeof ref);
+      const pathReference = ref(storage, "images/stars.jpg");
+      console.log(JSON.stringify(pathReference));
+      console.log("4");
+      // Upload blob to Firebase
+      console.log("5");
+
+      // Create the file metadata
+      /** @type {any} */
+      const metadata = {
+        contentType: "image/jpeg",
+      };
+      const fetchResponse = await fetch(props.image);
+      const blob = await fetchResponse.blob();
+      console.log(typeof blob);
+      console.log(JSON.stringify(blob));
+      console.log("HERE IS THE BLOB");
+      // Upload file and metadata to the object 'images/mountains.jpg'
+      const uploadTask = uploadBytesResumable(pathReference, blob, metadata);
+      setUploading(true);
+      // Listen for state changes, errors, and completion of the upload.
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              setUploading(false);
+              break;
+            case "running":
+              console.log("Upload is running");
+              setUploading(true);
+              break;
+          }
+        },
+        (error) => {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          setUploading(false);
+          switch (error.code) {
+            case "storage/unauthorized":
+              // User doesn't have permission to access the object
+              break;
+            case "storage/canceled":
+              // User canceled the upload
+              break;
+
+            // ...
+
+            case "storage/unknown":
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+        },
+        () => {
+          // Upload completed successfully, now we can get the download URL
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
+    }
+    uploadCode();
+  }, [imageToUpload]);
+
   const addImage = async () => {
+    console.log("1");
     let _image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -19,7 +121,6 @@ export default function UploadImage(props) {
 
     if (!_image.cancelled) {
       props.setImage(_image.uri);
-      postImage(_image);
     }
   };
 
@@ -32,62 +133,35 @@ export default function UploadImage(props) {
     }
   };
 
-  const postImage = async (imageFile) => {
-    const reference = storage().ref().child("/").child("petimage.png");
-    // ${utils.FilePath.PICTURES_DIRECTORY}/
-    await reference.putFile(imageFile);
+  const uploadFile = async () => {
+    console.log(typeof props.image);
+    console.log(JSON.stringify(props.image));
+    setImageToUpload(props.image);
   };
 
-  // const postImageUrl = (_image) => {
-  //   fetch("gs://paw-planner.appspot.com/.json", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(_image),
-  //   })
-  //     .then(() => {
-  //       console.log("in the then");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const getImageUrl = (endpoint) => {
-  //   try {
-  //     const response = await fetch(
-  //       "gs://paw-planner.appspot.com/" + endpoint + ".json"
-  //     );
-  //     const json = await response.json();
-
-  //     // changing data from nested dicts to a list of dicts
-  //     setImage(json.uri);
-  //   } catch (error) {
-  //     console.log("There is an error!");
-  //     console.error(error);
-  //   }
-  // };
-
   return (
-    <View style={imageUploaderStyles.container}>
-      {props.image && (
-        <Image
-          source={{ uri: props.image }}
-          style={{ width: 200, height: 200 }}
-        />
-      )}
+    <View>
+      <View style={imageUploaderStyles.container}>
+        {props.image && (
+          <Image
+            source={{ uri: props.image }}
+            style={{ width: 200, height: 200 }}
+          />
+        )}
 
-      <View style={imageUploaderStyles.uploadBtnContainer}>
-        <TouchableOpacity
-          onPress={(checkForCameraRollPermission, addImage)}
-          style={imageUploaderStyles.uploadBtn}
-        >
-          <Text>{props.image ? "Edit" : "Upload"} Image</Text>
-          <AntDesign name="camera" size={20} color="black" />
-        </TouchableOpacity>
+        <View style={imageUploaderStyles.uploadBtnContainer}>
+          <TouchableOpacity
+            onPress={(checkForCameraRollPermission, addImage)}
+            style={imageUploaderStyles.uploadBtn}
+          >
+            <Text>{props.image ? "Edit" : "Upload"} Image</Text>
+            <AntDesign name="camera" size={20} color="black" />
+          </TouchableOpacity>
+        </View>
       </View>
+      <Button title="upload" onPress={uploadFile}>
+        Upload
+      </Button>
     </View>
   );
 }
