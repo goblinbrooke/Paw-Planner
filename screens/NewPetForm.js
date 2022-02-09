@@ -279,7 +279,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "rgb(190, 225, 230)",
+    borderRadius: 20,
+    padding: 10,
   },
   buttonClose: {
     backgroundColor: "rgb(190, 225, 230)",
@@ -334,7 +336,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(190, 225, 230)",
     width: "60%",
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: "center",
     marginTop: 40,
   },
