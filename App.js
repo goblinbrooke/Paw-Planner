@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+    // <PetScreen />
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen

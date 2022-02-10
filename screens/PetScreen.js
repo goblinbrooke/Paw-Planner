@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Button, Image } from "react-native";
+import { Text, Button, Image, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function PetScreen(props) {
@@ -8,7 +8,7 @@ function PetScreen(props) {
 
   // database endpoint
   const pet =
-    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/-Mv1Mm1puEFMsK9tiQAY.json";
+    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/-MvW5GI4H2rZPz2JwVc3.json";
 
   const handlePet = async () => {
     try {
@@ -31,10 +31,16 @@ function PetScreen(props) {
 
   return (
     <SafeAreaView>
-      <Button title="Pet info!" onPress={handlePet}>
+      <Button title="Pet info!" onPress={handlePet}></Button>
+      <Button title="get-request" onPress={handlePet}>
         <Text>Run the get request</Text>
       </Button>
-      {/* <Image source={require(data.image)} /> */}
+      <View>
+        <Image
+          source={{ uri: data.imageUri }}
+          style={{ width: 200, height: 200 }}
+        />
+      </View>
       <Text>Pet name: {data.name}</Text>
       <Text>Pet age: {data.age}</Text>
       <Text>Pet birthday: {data.birthday}</Text>

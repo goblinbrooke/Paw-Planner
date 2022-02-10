@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import HomeScreen from "./HomeScreen";
 import {
   View,
   FlatList,
   StyleSheet,
-  SafeAreaView,
   Button,
   Text,
   ActivityIndicator,
@@ -65,8 +63,13 @@ function PetsListScreen(props) {
     <View style={styles.container}>
       {/* Currently logged in */}
       <Text style={styles.textStyle}>
-        Currently viewing the fur children of: </Text>
-        <Text style={[styles.textStyle, styles.textBottom]}> 💗{auth.currentUser?.email} </Text>
+        Currently viewing the fur children of:{" "}
+      </Text>
+      <Text style={[styles.textStyle, styles.textBottom]}>
+        {" "}
+        💗{auth.currentUser?.email}
+        Currently viewing the fur children of: 💗{auth.currentUser?.email}
+      </Text>
 
       {isLoading ? (
         <ActivityIndicator />
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     left: 130,
     resizeMode: "contain",
-    // 
+    //
     // flex: 1,
     // width: 50,
     // height: 50,
@@ -145,6 +148,7 @@ const styles = StyleSheet.create({
     color: "black",
     left: 300,
     marginBottom: 20,
+    resizeMode: "contain",
   },
   textStyle: {
     fontSize: 20,
@@ -164,6 +168,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "700",
     fontSize: 16,
+    // fontFamily: "Avenir",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,

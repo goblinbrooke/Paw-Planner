@@ -1,7 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from "react-native";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Image,
+} from "react-native";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
@@ -66,9 +78,12 @@ const LoginScreen = () => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       {/* Logo */}
       <SafeAreaView style={styles.logoContainer}>
-      <View> 
-        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
-      </View>
+        <View>
+          <Image
+            source={require("../assets/Illustration4.png")}
+            style={styles.logo}
+          />
+        </View>
       </SafeAreaView>
 
       {/* App Name */}
@@ -95,7 +110,10 @@ const LoginScreen = () => {
 
       {/* Login Button */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={[styles.button, styles.buttonOutlineWhite]}>
+        <TouchableOpacity
+          onPress={handleLogin}
+          style={[styles.button, styles.buttonOutlineWhite]}
+        >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
@@ -121,7 +139,7 @@ const styles = StyleSheet.create({
     fontSize: 70,
     fontWeight: "700",
     color: "rgb(205, 218, 253)",
-    fontFamily: "Avenir",
+    // fontFamily: "Avenir",
   },
   container: {
     justifyContent: "center",
@@ -184,7 +202,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200,
     marginTop: 20,
-    resizeMode: 'contain' 
+    resizeMode: "contain",
   },
 });
 

@@ -1,6 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View, SafeAreaView, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  SafeAreaView,
+  Image,
+} from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -23,7 +30,9 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>🌸 Welcome to Pet Central!🌸</Text>
-      <Text style= {[styles.headerText, styles.headerSpace]}>Manage your fur children here.</Text>
+      <Text style={[styles.headerText, styles.headerSpace]}>
+        Manage your fur children here.
+      </Text>
 
       {/* My pets button */}
       <TouchableOpacity
@@ -42,19 +51,25 @@ const HomeScreen = () => {
       </TouchableOpacity>
 
       {/* Logout button */}
-      <TouchableOpacity onPress={handleSignOut} style={[styles.buttonLogout, styles.buttonOutlineWhite]}>
+      <TouchableOpacity
+        onPress={handleSignOut}
+        style={[styles.buttonLogout, styles.buttonOutlineWhite]}
+      >
         <Text style={styles.buttonTextLogout}>Logout</Text>
       </TouchableOpacity>
 
       {/* Currently logged in */}
       <Text style={styles.textStyle}>Currently logged in: </Text>
       <Text style={styles.textStyle}>💗{auth.currentUser?.email}</Text>
-      
+
       {/* Logo */}
       <TouchableOpacity style={styles.logoContainer}>
-      <View> 
-        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
-      </View>
+        <View>
+          <Image
+            source={require("../assets/Illustration4.png")}
+            style={styles.logo}
+          />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -100,12 +115,12 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 2,
     marginBottom: 30,
-},
-buttonOutlinePurple: {
+  },
+  buttonOutlinePurple: {
     marginTop: 5,
     borderColor: "rgb(205, 218, 253)",
     borderWidth: 2,
-},
+  },
   headerText: {
     fontSize: 40,
     fontWeight: "700",
@@ -140,7 +155,7 @@ buttonOutlinePurple: {
     width: 50,
     height: 50,
     marginTop: 20,
-    resizeMode: 'contain', 
+    resizeMode: "contain",
     left: 150,
   },
 });
