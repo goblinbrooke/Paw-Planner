@@ -211,7 +211,7 @@ const NewPetForm = () => {
           value={isEnabled}
         />
       </View> */}
-        <Button
+        <TouchableOpacity
           style={[styles.submitButton, styles.submitButtonOutline]}
           title="Submit"
           onPress={handleSubmit(onSubmit)}
@@ -238,14 +238,19 @@ const NewPetForm = () => {
           </Modal>
         </View>
 
-      {/* Logo */}
-      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
-      <View> 
-        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
-        <Text style={styles.logoText}>💗HOME💗</Text>
-      </View>
-      </TouchableOpacity>
-      
+        {/* Logo */}
+        <TouchableOpacity
+          onPress={handleLogoClicked}
+          style={styles.logoContainer}
+        >
+          <View>
+            <Image
+              source={require("../assets/Illustration4.png")}
+              style={styles.logo}
+            />
+            <Text style={styles.logoText}>💗HOME💗</Text>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -335,7 +340,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginTop: 20,
-    resizeMode: 'contain' 
+    resizeMode: "contain",
   },
   logoText: {
     fontSize: 10,
@@ -358,5 +363,4 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginBottom: 50,
   },
-
 });
