@@ -10,14 +10,14 @@ const firebaseConfig = {
   projectId: "paw-planner",
   storageBucket: "paw-planner.appspot.com",
   messagingSenderId: "187624919709",
-  appId: "1:187624919709:web:49b3de8e6b02bf0ac0ba74"
+  appId: "1:187624919709:web:49b3de8e6b02bf0ac0ba74",
 };
-console.log("initializing app")
+console.log("initializing app");
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log("app initialized")
+console.log("app initialized");
 
-console.log("app initialized")
+console.log("app initialized");
 
 export { app };
 

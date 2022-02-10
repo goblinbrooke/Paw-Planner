@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -10,28 +10,23 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import PetScreen from "./PetScreen";
+import App, { PetData } from "../App";
 
-function PetsListScreen(props) {
+function PetsListScreen() {
   // state variables
   const [isLoading, setLoading] = useState(true);
-  const { data, setData } = props
-  // destructuring data and setdata from props
-  // declare the variable the same as the prop
-  
-
-  // database endpoint
-  const petsDB =
-    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json";
+  const data = useContext(PetData);
 
   const handlePets = async () => {
+    // database endpoint
+    const petsDB =
+      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json";
     try {
-      // console.log("in the try block");
       const response = await fetch(petsDB);
       const json = await response.json();
 
       // changing data from nested dicts to a list of dicts
-      setData(dataList(json));
+      data.setData(dataList(json));
     } catch (error) {
       console.log("There is an error!");
       console.error(error);
@@ -58,22 +53,22 @@ function PetsListScreen(props) {
     return petData;
   };
 
+  console.log(dataList);
+
   const handlePetClicked = () => {
     console.log("button pressed");
     navigation.replace("PetScreen");
   };
 
-    // database endpoint
-    // Get Request for Pet Data
-    const pet =
-    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/-MvW5GI4H2rZPz2JwVc3.json";
-
+  // Get Request for Pet Data
   const handlePet = async () => {
+    // database endpoint
+    const pet =
+      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/-MvW5GI4H2rZPz2JwVc3.json";
     try {
-      // console.log("in the try block");
       const response = await fetch(pet);
       const json = await response.json();
-      setData(json);
+      data.setData(json);
       console.log(json);
     } catch (error) {
       console.log("There is an error!");
@@ -99,18 +94,19 @@ function PetsListScreen(props) {
       ) : (
         <FlatList
           keyExtractor={(item) => item.id}
-          data={data}
+          data={data.data}
           renderItem={({ item }) => (
             <View>
-                <Button
-                  title={item.name}
-                  style={styles.item}
-                  onPress={
-                    () => { handlePetClicked(); handlePet(); }
-                    }
-                >
-                  {item.name}
-                </Button>
+              <Button
+                title={item.name}
+                style={styles.item}
+                onPress={() => {
+                  handlePetClicked();
+                  handlePet();
+                }}
+              >
+                {item.name}
+              </Button>
             </View>
           )}
         />
