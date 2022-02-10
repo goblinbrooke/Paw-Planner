@@ -10,11 +10,15 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import PetScreen from "./PetScreen";
 
 function PetsListScreen(props) {
   // state variables
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const { data, setData } = props
+  // destructuring data and setdata from props
+  // declare the variable the same as the prop
+  
 
   // database endpoint
   const petsDB =
@@ -59,6 +63,26 @@ function PetsListScreen(props) {
     navigation.replace("PetScreen");
   };
 
+    // database endpoint
+    // Get Request for Pet Data
+    const pet =
+    "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/-MvW5GI4H2rZPz2JwVc3.json";
+
+  const handlePet = async () => {
+    try {
+      // console.log("in the try block");
+      const response = await fetch(pet);
+      const json = await response.json();
+      setData(json);
+      console.log(json);
+    } catch (error) {
+      console.log("There is an error!");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* Currently logged in */}
@@ -68,7 +92,6 @@ function PetsListScreen(props) {
       <Text style={[styles.textStyle, styles.textBottom]}>
         {" "}
         💗{auth.currentUser?.email}
-        Currently viewing the fur children of: 💗{auth.currentUser?.email}
       </Text>
 
       {isLoading ? (
@@ -78,13 +101,17 @@ function PetsListScreen(props) {
           keyExtractor={(item) => item.id}
           data={data}
           renderItem={({ item }) => (
-            <Button
-              title={item.name}
-              style={styles.item}
-              onPress={handlePetClicked}
-            >
-              {item.name}
-            </Button>
+            <View>
+                <Button
+                  title={item.name}
+                  style={styles.item}
+                  onPress={
+                    () => { handlePetClicked(); handlePet(); }
+                    }
+                >
+                  {item.name}
+                </Button>
+            </View>
           )}
         />
       )}

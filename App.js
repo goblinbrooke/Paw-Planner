@@ -9,10 +9,13 @@ import PetsListScreen from "./screens/PetsListScreen";
 import NewPetForm from "./screens/NewPetForm";
 import PetScreen from "./screens/PetScreen";
 import UploadImage from "./screens/UploadImage";
+import React, { useState } from "react";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [data, setData] = useState([]);
+
   return (
     // <PetScreen />
     <NavigationContainer>
@@ -24,7 +27,9 @@ export default function App() {
         />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="NewPet" component={NewPetForm} />
-        <Stack.Screen name="PetsList" component={PetsListScreen} />
+        <Stack.Screen name="PetsList" > {
+          children{=props => { return (<PetsListScreen {...props} data={data} setData={setData} />);}}
+        </Stack.Screen>
         <Stack.Screen name="PetScreen" component={PetScreen} />
       </Stack.Navigator>
     </NavigationContainer>

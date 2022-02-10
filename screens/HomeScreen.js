@@ -31,7 +31,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <Text style={styles.headerText}>🌸 Welcome to Pet Central!🌸</Text>
       <Text style={[styles.headerText, styles.headerSpace]}>
-        Manage your fur children here.
+        Manage your fur children here
       </Text>
 
       {/* My pets button */}
