@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { AntDesign } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
+import PropTypes from "prop-types";
 import {
   Image,
   View,
@@ -7,12 +10,6 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
-import PropTypes from "prop-types";
-// import * as firebase from "firebase";
-// import { getStorage, ref } from "firebase/storage";
-import { firebaseConfig } from "../firebase";
 import {
   getStorage,
   ref,
@@ -21,30 +18,20 @@ import {
 } from "firebase/storage";
 
 export default function UploadImage(props) {
-  // if (!Firebase.apps.length) {
-  //   Firebase.initializeApp(firebaseConfig);
-
+  // state variables
   const [uploading, setUploading] = useState(false);
-
   const [imageToUpload, setImageToUpload] = useState();
+
   useEffect(() => {
     async function uploadCode() {
       if (!imageToUpload) {
         return;
       }
-      console.log("2");
-      // Implement a new Blob promise with XMLHTTPRequest
-      console.log("3");
-      // Create a ref in Firebase (I'm using my user's ID)
-      console.log(typeof getStorage);
-      // const storage = firebase.storage();
+
       const storage = getStorage();
-      console.log(typeof ref);
-      const pathReference = ref(storage, "images/stars.jpg");
-      console.log(JSON.stringify(pathReference));
-      console.log("4");
-      // Upload blob to Firebase
-      console.log("5");
+      const pathReference = ref(storage, "images/pet.jpg");
+
+      console.log("This is the pathReference: ", JSON.stringify(pathReference));
 
       // Create the file metadata
       /** @type {any} */
@@ -52,13 +39,17 @@ export default function UploadImage(props) {
         contentType: "image/jpeg",
       };
       const fetchResponse = await fetch(props.image);
+      console.log("This is fetchResponse: ", fetchResponse);
+
       const blob = await fetchResponse.blob();
+      console.log("HERE IS THE BLOB");
       console.log(typeof blob);
       console.log(JSON.stringify(blob));
-      console.log("HERE IS THE BLOB");
-      // Upload file and metadata to the object 'images/mountains.jpg'
+
+      // Upload file and metadata to the object 'images/pet.jpg'
       const uploadTask = uploadBytesResumable(pathReference, blob, metadata);
       setUploading(true);
+
       // Listen for state changes, errors, and completion of the upload.
       uploadTask.on(
         "state_changed",
@@ -79,8 +70,6 @@ export default function UploadImage(props) {
           }
         },
         (error) => {
-          // A full list of error codes is available at
-          // https://firebase.google.com/docs/storage/web/handle-errors
           setUploading(false);
           switch (error.code) {
             case "storage/unauthorized":
@@ -101,6 +90,7 @@ export default function UploadImage(props) {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             console.log("File available at", downloadURL);
+            props.setImageUri(downloadURL);
           });
         }
       );
@@ -124,6 +114,12 @@ export default function UploadImage(props) {
     }
   };
 
+  const uploadFile = async () => {
+    console.log(typeof props.image);
+    console.log(JSON.stringify(props.image));
+    setImageToUpload(props.image);
+  };
+
   const checkForCameraRollPermission = async () => {
     const { status } = await ImagePicker.getMediaLibraryPermissionsAsync();
     if (status !== "granted") {
@@ -131,12 +127,6 @@ export default function UploadImage(props) {
     } else {
       console.log("Media Permissions are granted");
     }
-  };
-
-  const uploadFile = async () => {
-    console.log(typeof props.image);
-    console.log(JSON.stringify(props.image));
-    setImageToUpload(props.image);
   };
 
   return (
@@ -154,13 +144,13 @@ export default function UploadImage(props) {
             onPress={(checkForCameraRollPermission, addImage)}
             style={imageUploaderStyles.uploadBtn}
           >
-            <Text>{props.image ? "Edit" : "Upload"} Image</Text>
+            <Text>{props.image ? "Edit" : "Select"} Image</Text>
             <AntDesign name="camera" size={20} color="black" />
           </TouchableOpacity>
         </View>
       </View>
       <Button title="upload" onPress={uploadFile}>
-        Upload
+        Upload Image
       </Button>
     </View>
   );

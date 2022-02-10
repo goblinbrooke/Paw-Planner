@@ -11,7 +11,7 @@ import {
   Modal,
   Pressable,
 } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, set } from "react-hook-form";
 import { SafeAreaView } from "react-native-safe-area-context";
 import UploadImage from "./UploadImage";
 
@@ -23,11 +23,9 @@ const NewPetForm = () => {
     reset,
     formState: { errors, isValid, isSubmitSuccessful },
   } = useForm({ mode: "onBlur" });
-
   const [image, setImage] = useState(null);
-
+  const [imageUri, setImageUri] = useState();
   const [species, setSpecies] = useState(null);
-
   const [isModalVisible, setModalVisible] = useState(false);
 
   // helper functions
@@ -36,13 +34,14 @@ const NewPetForm = () => {
 
     if (isModalVisible === false) {
       reset();
-      setImage(null);
-      setSpecies(null);
+      setImage();
+      setSpecies();
+      setImageUri();
     }
   };
 
   const onSubmit = (data) => {
-    const newData = { ...data, image, species };
+    const newData = { ...data, imageUri, species };
     fetch(
       "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json",
       {
@@ -61,7 +60,12 @@ const NewPetForm = () => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Add a new pet!</Text>
       <ScrollView>
-        <UploadImage image={image} setImage={setImage} />
+        <UploadImage
+          image={image}
+          setImage={setImage}
+          imageUri={imageUri}
+          setImageUri={setImageUri}
+        />
         <Controller
           control={control}
           name="name"
