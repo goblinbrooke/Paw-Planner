@@ -19,20 +19,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import UploadImage from "./UploadImage";
 
 const NewPetForm = () => {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  // const userId = user.uid;
+  const navigation = useNavigation();
+
   // state variables
+  const [image, setImage] = useState(null);
+  const [imageUri, setImageUri] = useState();
+  const [species, setSpecies] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors, isValid, isSubmitSuccessful },
   } = useForm({ mode: "onBlur" });
-  const [image, setImage] = useState(null);
-  const [imageUri, setImageUri] = useState();
-  const [species, setSpecies] = useState(null);
-  const [isModalVisible, setModalVisible] = useState(false);
 
   // helper functions
   const toggleModal = () => {
@@ -46,11 +45,23 @@ const NewPetForm = () => {
     }
   };
 
-  const onSubmit = (data, userId) => {
+  const handleLogoClicked = () => {
+    navigation.navigate("Home");
+  };
+
+  // post pet info to database
+  const onSubmit = (petObject) => {
+    // current user information
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const userId = user.uid;
+
+    // generate petId
     const petId = uuid.v4();
+
+    // create body for patch request
     let newData = {};
-    // newData[`pets/${petId}`] = { ...data, imageUri, species, petId };
-    newData[petId] = { ...data, imageUri, species, petId };
+    newData[petId] = { ...petObject, imageUri, species, petId };
     fetch(
       "https://paw-planner-default-rtdb.firebaseio.com/user/" +
         userId +
@@ -65,11 +76,6 @@ const NewPetForm = () => {
       }
     );
     toggleModal();
-  };
-
-  const navigation = useNavigation();
-  const handleLogoClicked = () => {
-    navigation.navigate("Home");
   };
 
   return (
