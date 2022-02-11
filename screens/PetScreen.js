@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Text, Image, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Text, Image, View, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import App, { PetData } from "../App";
 
@@ -10,6 +11,18 @@ function PetScreen() {
   const handleLogoClicked = () => {
     navigation.replace("HomeScreen");
   };
+
+  const deleteRequest = (petId) => {
+    fetch(
+      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/" + petId,
+      {
+        method: "DELETE",
+      }
+    ).then(console.log("pet deleted!"));
+    // toggleModal();
+  };
+
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView>
@@ -26,6 +39,7 @@ function PetScreen() {
       <Text>Pet species: {data.data.species}</Text>
       <Text>Pet breed: {data.data.breed}</Text>
       <Text>Pet coloring: {data.data.coloring}</Text>
+      <Button title={"delete pet"} onPress={deleteRequest}></Button>
     </SafeAreaView>
   );
 }
