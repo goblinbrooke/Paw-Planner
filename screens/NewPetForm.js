@@ -65,189 +65,188 @@ const NewPetForm = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.addtext}>🐾 Add a new fur baby! 🐾</Text>
-      <ScrollView>
-        <UploadImage
-          image={image}
-          setImage={setImage}
-          imageUri={imageUri}
-          setImageUri={setImageUri}
-        />
-        <Controller
-          control={control}
-          name="name"
-          render={({ field: { onChange, value, onBlur } }) => (
-            <TextInput
-              style={styles.input}
-              iconName="person"
-              iconType="MaterialIcons"
-              placeholder="Enter pet's name"
-              value={value}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="age"
-          render={({ field: { onChange, value, onBlur } }) => (
-            <TextInput
-              style={styles.input}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              placeholder="Enter pet's age"
-              keyboardType="numeric"
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="birthday"
-          render={({ field: { onChange, value, onBlur } }) => (
-            <TextInput
-              style={styles.input}
-              autoComplete="birthdate-day"
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              placeholder="Enter pet's birthday"
-            />
-          )}
-        />
-        <View>
-          <Text style={styles.petSpeciesText}>Pet species:</Text>
-          <BouncyCheckbox
-            fillColor="#BEE1E6"
-            textComponent={<Text> cat</Text>}
-            onPress={(isChecked = boolean) => {
-              setSpecies("cat");
-            }}
+    <ScrollView>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.addtext}>🐾 Add a new fur baby! 🐾</Text>
+          <UploadImage
+            image={image}
+            setImage={setImage}
+            imageUri={imageUri}
+            setImageUri={setImageUri}
           />
-          <BouncyCheckbox
-            fillColor="#BEE1E6"
-            textComponent={<Text> dog</Text>}
-            onPress={(isChecked = boolean) => {
-              setSpecies("dog");
-            }}
+          <Controller
+            control={control}
+            name="name"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <TextInput
+                style={styles.input}
+                iconName="person"
+                iconType="MaterialIcons"
+                placeholder="Enter pet's name"
+                value={value}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+              />
+            )}
           />
-          <BouncyCheckbox
-            fillColor="#BEE1E6"
-            textComponent={<Text> bird</Text>}
-            onPress={(isChecked = boolean) => {
-              setSpecies("bird");
-            }}
+          <Controller
+            control={control}
+            name="age"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <TextInput
+                style={styles.input}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                placeholder="Enter pet's age"
+                keyboardType="numeric"
+              />
+            )}
           />
-          <BouncyCheckbox
-            fillColor="#BEE1E6"
-            textComponent={<Text> small rodent</Text>}
-            onPress={(isChecked = boolean) => {
-              setSpecies("small rodent");
-            }}
+          <Controller
+            control={control}
+            name="birthday"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <TextInput
+                style={styles.input}
+                autoComplete="birthdate-day"
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                placeholder="Enter pet's birthday"
+              />
+            )}
           />
-          <BouncyCheckbox
-            fillColor="#BEE1E6"
-            textComponent={<Text> fish</Text>}
-            onPress={(isChecked = boolean) => {
-              setSpecies("fish");
-            }}
+          <View>
+            <Text style={styles.petSpeciesText}>Pet species:</Text>
+            <BouncyCheckbox
+              fillColor="#BEE1E6"
+              textComponent={<Text> cat</Text>}
+              onPress={(isChecked = boolean) => {
+                setSpecies("cat");
+              }}
+            />
+            <BouncyCheckbox
+              fillColor="#BEE1E6"
+              textComponent={<Text> dog</Text>}
+              onPress={(isChecked = boolean) => {
+                setSpecies("dog");
+              }}
+            />
+            <BouncyCheckbox
+              fillColor="#BEE1E6"
+              textComponent={<Text> bird</Text>}
+              onPress={(isChecked = boolean) => {
+                setSpecies("bird");
+              }}
+            />
+            <BouncyCheckbox
+              fillColor="#BEE1E6"
+              textComponent={<Text> small rodent</Text>}
+              onPress={(isChecked = boolean) => {
+                setSpecies("small rodent");
+              }}
+            />
+            <BouncyCheckbox
+              fillColor="#BEE1E6"
+              textComponent={<Text> fish</Text>}
+              onPress={(isChecked = boolean) => {
+                setSpecies("fish");
+              }}
+            />
+          </View>
+          <Controller
+            control={control}
+            name="breed"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <TextInput
+                style={styles.input}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                placeholder="Enter pet's breed"
+              />
+            )}
           />
-        </View>
-        <Controller
-          control={control}
-          name="breed"
-          render={({ field: { onChange, value, onBlur } }) => (
-            <TextInput
-              style={styles.input}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              placeholder="Enter pet's breed"
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="coloring"
-          render={({ field: { onChange, value, onBlur } }) => (
-            <TextInput
-              style={styles.input}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              placeholder="Enter pet's coloring"
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="microchip"
-          render={({ field: { onChange, value, onBlur } }) => (
-            <TextInput
-              style={styles.input}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              placeholder="Enter pet's microchip number"
-              keyboardType="numeric"
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="dietary needs"
-          render={({ field: { onChange, value, onBlur } }) => (
-            <TextInput
-              style={styles.input}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              placeholder="Enter pet's dietary needs"
-            />
-          )}
-        />
-        {/* <View>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
-      </View> */}
-        <Button
-          style={[styles.submitButton, styles.submitButtonOutline]}
-          title="Submit"
-          onPress={handleSubmit(onSubmit)}
-        />
+          <Controller
+            control={control}
+            name="coloring"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <TextInput
+                style={styles.input}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                placeholder="Enter pet's coloring"
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="microchip"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <TextInput
+                style={styles.input}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                placeholder="Enter pet's microchip number"
+                keyboardType="numeric"
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="dietary needs"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <TextInput
+                style={styles.input}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                placeholder="Enter pet's dietary needs"
+              />
+            )}
+          />
+          {/* <View>
+          <Switch
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View> */}
+          <Button
+            style={[styles.submitButton, styles.submitButtonOutline]}
+            title="Submit"
+            onPress={handleSubmit(onSubmit)}
+          />
 
-        {/* popup for successfully submitted form */}
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={isModalVisible}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Fur baby added! 💗</Text>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={toggleModal}
-                >
-                  <Text style={styles.textStyle}>Exit</Text>
-                </Pressable>
+          {/* popup for successfully submitted form */}
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={isModalVisible}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Fur baby added! 💗</Text>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={toggleModal}
+                  >
+                    <Text style={styles.textStyle}>Exit</Text>
+                  </Pressable>
+                </View>
               </View>
-            </View>
-          </Modal>
-        </View>
+            </Modal>
+          </View>
 
-      {/* Logo */}
-      <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
-      <View> 
-        <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
-        <Text style={styles.logoText}>💗HOME💗</Text>
-      </View>
-      </TouchableOpacity>
-      
-      </ScrollView>
-    </SafeAreaView>
+        {/* Logo */}
+        <TouchableOpacity onPress={handleLogoClicked} style={styles.logoContainer}>
+        <View> 
+          <Image source={require("../assets/Illustration4.png")} style={styles.logo} />
+          <Text style={styles.logoText}>💗HOME💗</Text>
+        </View>
+        </TouchableOpacity>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 
