@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  ScrollView,
 } from "react-native";
 import {
   getAuth,
@@ -85,57 +86,59 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      {/* Logo */}
-      <SafeAreaView style={styles.logoContainer}>
-        <View>
-          <Image
-            source={require("../assets/Illustration4.png")}
-            style={styles.logo}
+    <ScrollView>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        {/* Logo */}
+        <SafeAreaView style={styles.logoContainer}>
+          <View>
+            <Image
+              source={require("../assets/Illustration4.png")}
+              style={styles.logo}
+            />
+          </View>
+        </SafeAreaView>
+
+        {/* App Name */}
+        <View style={styles.appNameContainer}>
+          <Text style={styles.appName}>Paw Planner</Text>
+        </View>
+
+        {/* Email and Password Input */}
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={[styles.input, styles.buttonOutlinePink]}
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={[styles.input, styles.buttonOutlinePink]}
+            secureTextEntry
           />
         </View>
-      </SafeAreaView>
 
-      {/* App Name */}
-      <View style={styles.appNameContainer}>
-        <Text style={styles.appName}>Paw Planner</Text>
-      </View>
+        {/* Login Button */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={handleLogin}
+            style={[styles.button, styles.buttonOutlineWhite]}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
 
-      {/* Email and Password Input */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={[styles.input, styles.buttonOutlinePink]}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={[styles.input, styles.buttonOutlinePink]}
-          secureTextEntry
-        />
-      </View>
-
-      {/* Login Button */}
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleLogin}
-          style={[styles.button, styles.buttonOutlineWhite]}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-
-        {/* Register Button */}
-        <TouchableOpacity
-          onPress={handleSignup}
-          style={[styles.button, styles.buttonOutlinePink]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+          {/* Register Button */}
+          <TouchableOpacity
+            onPress={handleSignup}
+            style={[styles.button, styles.buttonOutlinePink]}
+          >
+            <Text style={styles.buttonOutlineText}>Register</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
