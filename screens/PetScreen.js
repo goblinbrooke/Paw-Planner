@@ -33,8 +33,6 @@ function PetScreen({ route, navigation }) {
     // toggleModal();
   };
 
-  // const navigation = useNavigation();
-
   return (
     <ScrollView>
       <SafeAreaView>

@@ -115,12 +115,13 @@ export default function UploadImage(props) {
     if (!_image.cancelled) {
       props.setImage(_image.uri);
     }
+    uploadFile(_image.uri);
   };
 
-  const uploadFile = async () => {
-    console.log(typeof props.image);
-    console.log(JSON.stringify(props.image));
-    setImageToUpload(props.image);
+  const uploadFile = async (image) => {
+    console.log(typeof image);
+    console.log(JSON.stringify(image));
+    setImageToUpload(image);
   };
 
   const checkForCameraRollPermission = async () => {
@@ -147,23 +148,11 @@ export default function UploadImage(props) {
             onPress={(checkForCameraRollPermission, addImage)}
             style={imageUploaderStyles.uploadBtn}
           >
-            <Text>{props.image ? "Edit" : "Select"} Image</Text>
+            <Text>{props.image ? "Uploaded!" : "Select Image"}</Text>
             <AntDesign name="camera" size={20} color="black" />
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* Upload Photo Button */}
-      <TouchableOpacity
-        style={[
-          imageUploaderStyles.button,
-          imageUploaderStyles.buttonOutlineWhite,
-        ]}
-        title="upload"
-        onPress={uploadFile}
-      >
-        <Text style={imageUploaderStyles.buttonText}>Say "Cheese"! 📸</Text>
-      </TouchableOpacity>
     </View>
   );
 }
