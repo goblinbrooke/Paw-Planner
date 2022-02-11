@@ -121,7 +121,7 @@ function PetsListScreen() {
                 handlePet(item);
               }}
             >
-              <Text>{item.name}</Text>
+              <Text style={styles.item}>{item.name}</Text>
             </TouchableOpacity>
           )}
         />
@@ -156,13 +156,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   item: {
-    marginTop: 24,
-    padding: 30,
+    marginTop: 10,
+    padding: 10,
     backgroundColor: "rgb(190, 225, 230)",
     borderRadius: 20,
     fontSize: 24,
     color: "white",
-    fontStyle: "bold",
+    fontWeight: "bold",
   },
   logoContainer: {
     flex: 1,
