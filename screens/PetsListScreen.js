@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
 import {
   View,
+  Button,
   FlatList,
   StyleSheet,
   Text,
@@ -12,30 +14,20 @@ import {
 import App, { PetData } from "../App";
 
 function PetsListScreen() {
+  const navigation = useNavigation();
+
   // state variables
   const [isLoading, setLoading] = useState(true);
+  const [petsList, setPetsList] = useState();
   const data = useContext(PetData);
 
-  const handlePets = async (userId) => {
-    // database endpoint
-    const petsDB =
-      "https://paw-planner-default-rtdb.firebaseio.com/user/" + userId;
-    try {
-      const response = await fetch(petsDB);
-      const json = await response.json();
-
-      // changing data from nested dicts to a list of dicts
-      data.setData(dataList(json));
-    } catch (error) {
-      console.log("There is an error!");
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  // helper functions
+  const getCurrentUser = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    return user.uid;
   };
 
-  const navigation = useNavigation();
-  
   // Back to home
   const handleLogoClicked = () => {
     console.log("button pressed");
@@ -54,20 +46,43 @@ function PetsListScreen() {
     return petData;
   };
 
-  console.log(dataList);
-
   const handlePetClicked = () => {
     console.log("button pressed");
     navigation.replace("PetScreen");
   };
 
+  // get all pets for a specific user
+  const handlePets = async () => {
+    const userId = getCurrentUser();
+    console.log(userId);
+
+    // database endpoint
+    const petsEndpoint = `https://paw-planner-default-rtdb.firebaseio.com/user/${userId}/pets.json`;
+    try {
+      const response = await fetch(petsEndpoint);
+      const json = await response.json();
+      console.log("THIS IS THE JSON RESPONSE:", json);
+
+      // changing data from nested dicts to a list of dicts
+      setPetsList(dataList(json));
+      console.log("This is pets list:", petsList);
+    } catch (error) {
+      console.log("There is an error!");
+      console.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Get Request for Pet Data
   const handlePet = async () => {
+    const userId = getCurrentUser();
+    // const petId = how do we get the petId??
+
     // database endpoint
-    const pet =
-      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/-MvW5GI4H2rZPz2JwVc3.json";
+    const petEndpoint = `https://paw-planner-default-rtdb.firebaseio.com/user/${userId}/pets/${petId}.json`;
     try {
-      const response = await fetch(pet);
+      const response = await fetch(petEndpoint);
       const json = await response.json();
       data.setData(json);
       console.log(json);
@@ -94,21 +109,19 @@ function PetsListScreen() {
         <ActivityIndicator />
       ) : (
         <FlatList
-          keyExtractor={(item) => item.id}
-          data={data.data}
+          keyExtractor={(item) => item.petId}
+          data={petsList}
           renderItem={({ item }) => (
-            <View>
-              <TouchableOpacity
-                title={item.name}
-                style={styles.item}
-                onPress={() => {
-                  handlePetClicked();
-                  handlePet();
-                }}
-              >
-                {item.name}
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              title={item.name}
+              style={styles.item}
+              onPress={() => {
+                handlePetClicked();
+                handlePet();
+              }}
+            >
+              <Text>{item.name}</Text>
+            </TouchableOpacity>
           )}
         />
       )}
