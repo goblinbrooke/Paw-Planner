@@ -22,10 +22,6 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const database = getDatabase();
-  // let ref = firebase.database().ref("user");
-  // console.log(ref);
-
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -73,7 +69,7 @@ const LoginScreen = () => {
     userBody[user.uid] = {
       email: user.email,
       id: user.id,
-      pets: [1],
+      pets: 0,
     };
     fetch("https://paw-planner-default-rtdb.firebaseio.com/user.json", {
       method: "PATCH",

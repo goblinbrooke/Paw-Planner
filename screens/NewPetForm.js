@@ -60,181 +60,178 @@ const NewPetForm = () => {
     // generate petId
     const petId = uuid.v4();
 
+    // endpoint for pets list
+    const petsEndpoint = `https://paw-planner-default-rtdb.firebaseio.com/user/${userId}/pets.json`;
+
     // create body for patch request
     let newData = {};
     newData[petId] = { ...petObject, imageUri, species, petId };
-    fetch(
-      "https://paw-planner-default-rtdb.firebaseio.com/user/" +
-        userId +
-        "/pets.json",
-      {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newData),
-      }
-    );
+    fetch(petsEndpoint === 0 ? petsEndpoint + "0" : petsEndpoint, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newData),
+    });
     toggleModal();
   };
 
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
-        
         {/* Header */}
         <Text style={styles.addtext}>🐾 Create your pet's profile! 🐾</Text>
-          <UploadImage
-            image={image}
-            setImage={setImage}
-            imageUri={imageUri}
-            setImageUri={setImageUri}
-          />
-          
+        <UploadImage
+          image={image}
+          setImage={setImage}
+          imageUri={imageUri}
+          setImageUri={setImageUri}
+        />
+
         {/* Name */}
-          <Controller
-            control={control}
-            name="name"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <TextInput
-                style={styles.input}
-                iconName="person"
-                iconType="MaterialIcons"
-                placeholder="Enter pet's name"
-                value={value}
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-              />
-            )}
-          />
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              iconName="person"
+              iconType="MaterialIcons"
+              placeholder="Enter pet's name"
+              value={value}
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+            />
+          )}
+        />
 
         {/* Age */}
-          <Controller
-            control={control}
-            name="age"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <TextInput
-                style={styles.input}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="Enter pet's age"
-                keyboardType="numeric"
-              />
-            )}
-          />
+        <Controller
+          control={control}
+          name="age"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet's age"
+              keyboardType="numeric"
+            />
+          )}
+        />
 
         {/* Birthday */}
-          <Controller
-            control={control}
-            name="birthday"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <TextInput
-                style={styles.input}
-                autoComplete="birthdate-day"
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="Enter pet's birthday"
-              />
-            )}
-          />
+        <Controller
+          control={control}
+          name="birthday"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              autoComplete="birthdate-day"
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet's birthday"
+            />
+          )}
+        />
 
         {/* Species */}
-          <View>
-            <Text style={styles.petSpeciesText}>Pet species:</Text>
-            <BouncyCheckbox
-              fillColor="#BEE1E6"
-              textComponent={<Text> cat</Text>}
-              onPress={(isChecked = boolean) => {
-                setSpecies("cat");
-              }}
-            />
-            <BouncyCheckbox
-              fillColor="#BEE1E6"
-              textComponent={<Text> dog</Text>}
-              onPress={(isChecked = boolean) => {
-                setSpecies("dog");
-              }}
-            />
-            <BouncyCheckbox
-              fillColor="#BEE1E6"
-              textComponent={<Text> bird</Text>}
-              onPress={(isChecked = boolean) => {
-                setSpecies("bird");
-              }}
-            />
-            <BouncyCheckbox
-              fillColor="#BEE1E6"
-              textComponent={<Text> small rodent</Text>}
-              onPress={(isChecked = boolean) => {
-                setSpecies("small rodent");
-              }}
-            />
-            <BouncyCheckbox
-              fillColor="#BEE1E6"
-              textComponent={<Text> fish</Text>}
-              onPress={(isChecked = boolean) => {
-                setSpecies("fish");
-              }}
-            />
-          </View>
+        <View>
+          <Text style={styles.petSpeciesText}>Pet species:</Text>
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> cat</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("cat");
+            }}
+          />
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> dog</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("dog");
+            }}
+          />
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> bird</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("bird");
+            }}
+          />
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> small rodent</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("small rodent");
+            }}
+          />
+          <BouncyCheckbox
+            fillColor="#BEE1E6"
+            textComponent={<Text> fish</Text>}
+            onPress={(isChecked = boolean) => {
+              setSpecies("fish");
+            }}
+          />
+        </View>
 
         {/* Breed */}
-          <Controller
-            control={control}
-            name="breed"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <TextInput
-                style={styles.input}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="Enter pet's breed"
-              />
-            )}
-          />
+        <Controller
+          control={control}
+          name="breed"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet's breed"
+            />
+          )}
+        />
 
         {/* Coloring */}
-          <Controller
-            control={control}
-            name="coloring"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <TextInput
-                style={styles.input}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="Enter pet's coloring"
-              />
-            )}
-          />
+        <Controller
+          control={control}
+          name="coloring"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet's coloring"
+            />
+          )}
+        />
 
         {/* Microchip */}
-          <Controller
-            control={control}
-            name="microchip"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <TextInput
-                style={styles.input}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="Enter pet's microchip number"
-                keyboardType="numeric"
-              />
-            )}
-          />
+        <Controller
+          control={control}
+          name="microchip"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet's microchip number"
+              keyboardType="numeric"
+            />
+          )}
+        />
 
         {/* Dietary Needs */}
-          <Controller
-            control={control}
-            name="dietary needs"
-            render={({ field: { onChange, value, onBlur } }) => (
-              <TextInput
-                style={styles.input}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="Enter pet's dietary needs"
-              />
-            )}
-          />
+        <Controller
+          control={control}
+          name="dietary needs"
+          render={({ field: { onChange, value, onBlur } }) => (
+            <TextInput
+              style={styles.input}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholder="Enter pet's dietary needs"
+            />
+          )}
+        />
 
         {/* SUBMIT BUTTON */}
         <TouchableOpacity
@@ -245,26 +242,26 @@ const NewPetForm = () => {
           <Text style={styles.submitText}>Add my child! 💗</Text>
         </TouchableOpacity>
 
-          {/* Popup for successfully submitted form */}
-          <View style={styles.centeredView}>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={isModalVisible}
-            >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <Text style={styles.modalText}>Fur baby added! 💗</Text>
-                  <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={toggleModal}
-                  >
-                    <Text style={styles.textStyle}>Exit</Text>
-                  </Pressable>
-                </View>
+        {/* Popup for successfully submitted form */}
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={isModalVisible}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Fur baby added! 💗</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={toggleModal}
+                >
+                  <Text style={styles.textStyle}>Exit</Text>
+                </Pressable>
               </View>
-            </Modal>
-          </View>
+            </View>
+          </Modal>
+        </View>
 
         {/* Logo */}
         <TouchableOpacity
@@ -279,7 +276,6 @@ const NewPetForm = () => {
             <Text style={styles.logoText}>💗HOME💗</Text>
           </View>
         </TouchableOpacity>
-
       </SafeAreaView>
     </ScrollView>
   );
