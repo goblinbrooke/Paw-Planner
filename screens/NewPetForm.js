@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import uuid from "react-native-uuid";
+import { getAuth } from "firebase/auth";
 import {
   ScrollView,
-  Button,
   TextInput,
   StyleSheet,
   Text,
   View,
-  Switch,
   TouchableOpacity,
   Image,
   Modal,
   Pressable,
 } from "react-native";
-import { useForm, Controller, set } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { SafeAreaView } from "react-native-safe-area-context";
 import UploadImage from "./UploadImage";
 
 const NewPetForm = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  // const userId = user.uid;
   // state variables
   const {
     control,
@@ -43,12 +46,17 @@ const NewPetForm = () => {
     }
   };
 
-  const onSubmit = (data) => {
-    const newData = { ...data, imageUri, species };
+  const onSubmit = (data, userId) => {
+    const petId = uuid.v4();
+    let newData = {};
+    // newData[`pets/${petId}`] = { ...data, imageUri, species, petId };
+    newData[petId] = { ...data, imageUri, species, petId };
     fetch(
-      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json",
+      "https://paw-planner-default-rtdb.firebaseio.com/user/" +
+        userId +
+        "/pets.json",
       {
-        method: "POST",
+        method: "PATCH",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -202,15 +210,8 @@ const NewPetForm = () => {
             />
           )}
         />
-        {/* <View>
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
-      </View> */}
+
+        {/* SUBMIT BUTTON */}
         <TouchableOpacity
           style={[styles.submitButton, styles.submitButtonOutline]}
           title="Submit"

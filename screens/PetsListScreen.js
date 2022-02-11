@@ -17,10 +17,10 @@ function PetsListScreen() {
   const [isLoading, setLoading] = useState(true);
   const data = useContext(PetData);
 
-  const handlePets = async () => {
+  const handlePets = async (userId) => {
     // database endpoint
     const petsDB =
-      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets.json";
+      "https://paw-planner-default-rtdb.firebaseio.com/user/" + userId;
     try {
       const response = await fetch(petsDB);
       const json = await response.json();

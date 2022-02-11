@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { getDatabase, ref } from "firebase/database";
 import React, { useState, useEffect } from "react";
 import {
   KeyboardAvoidingView,
@@ -20,6 +21,10 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // const database = getDatabase();
+  // let ref = firebase.database().ref("user");
+  // console.log(ref);
+
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -39,12 +44,14 @@ const LoginScreen = () => {
         // Signed in
         const user = userCredential.user;
         userData(user);
+        console.log(user);
         console.log("Registered with:", user.email);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
         // ..
       });
   };
@@ -61,17 +68,20 @@ const LoginScreen = () => {
   };
 
   const userData = (user) => {
+    let userBody = {};
+    userBody[user.uid] = {
+      email: user.email,
+      id: user.id,
+      pets: [1],
+    };
     fetch("https://paw-planner-default-rtdb.firebaseio.com/user.json", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: user.email,
-        pets: [],
-      }),
-    });
+      body: JSON.stringify(userBody),
+    }).then(console.log("Console logging the post"));
   };
 
   return (
