@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 70,
     fontWeight: "700",
-    color: "rgb(205, 218, 253)",
+    color: "rgb(162, 210, 255)",
     // fontFamily: "Avenir",
   },
   container: {

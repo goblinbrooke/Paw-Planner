@@ -149,9 +149,14 @@ export default function UploadImage(props) {
           </TouchableOpacity>
         </View>
       </View>
-      <Button title="upload" onPress={uploadFile}>
-        Upload Image
-      </Button>
+
+      {/* Upload Photo Button */}
+      <TouchableOpacity 
+      style={[imageUploaderStyles.button, imageUploaderStyles.buttonOutlineWhite]}
+      title="upload" 
+      onPress={uploadFile}>
+        <Text style={imageUploaderStyles.buttonText}>Say "Cheese"! 📸</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -174,11 +179,37 @@ const imageUploaderStyles = StyleSheet.create({
     backgroundColor: "lightgrey",
     width: "100%",
     height: "25%",
+    padding: 10,
   },
   uploadBtn: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    alignSelf: "center",
+  },
+  buttonOutlineWhite: {
+    marginTop: 5,
+    borderColor: "white",
+    borderWidth: 2,
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgb(190, 225, 230)",
+    width: "60%",
+    height: 50,
+    padding: 15,
+    marginTop: 10,
+    borderRadius: 20,
+    marginBottom: 10,
+    alignSelf: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+    textAlign: "center",
   },
 });
 

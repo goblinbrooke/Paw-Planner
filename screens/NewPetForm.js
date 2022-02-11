@@ -45,6 +45,7 @@ const NewPetForm = () => {
     }
   };
 
+  // Back to home
   const handleLogoClicked = () => {
     navigation.navigate("Home");
   };
@@ -81,13 +82,17 @@ const NewPetForm = () => {
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.addtext}>🐾 Add a new fur baby! 🐾</Text>
+        
+        {/* Header */}
+        <Text style={styles.addtext}>🐾 Create your pet's profile! 🐾</Text>
           <UploadImage
             image={image}
             setImage={setImage}
             imageUri={imageUri}
             setImageUri={setImageUri}
           />
+          
+        {/* Name */}
           <Controller
             control={control}
             name="name"
@@ -103,6 +108,8 @@ const NewPetForm = () => {
               />
             )}
           />
+
+        {/* Age */}
           <Controller
             control={control}
             name="age"
@@ -116,6 +123,8 @@ const NewPetForm = () => {
               />
             )}
           />
+
+        {/* Birthday */}
           <Controller
             control={control}
             name="birthday"
@@ -129,6 +138,8 @@ const NewPetForm = () => {
               />
             )}
           />
+
+        {/* Species */}
           <View>
             <Text style={styles.petSpeciesText}>Pet species:</Text>
             <BouncyCheckbox
@@ -167,6 +178,8 @@ const NewPetForm = () => {
               }}
             />
           </View>
+
+        {/* Breed */}
           <Controller
             control={control}
             name="breed"
@@ -179,6 +192,8 @@ const NewPetForm = () => {
               />
             )}
           />
+
+        {/* Coloring */}
           <Controller
             control={control}
             name="coloring"
@@ -191,6 +206,8 @@ const NewPetForm = () => {
               />
             )}
           />
+
+        {/* Microchip */}
           <Controller
             control={control}
             name="microchip"
@@ -204,6 +221,8 @@ const NewPetForm = () => {
               />
             )}
           />
+
+        {/* Dietary Needs */}
           <Controller
             control={control}
             name="dietary needs"
@@ -222,9 +241,11 @@ const NewPetForm = () => {
           style={[styles.submitButton, styles.submitButtonOutline]}
           title="Submit"
           onPress={handleSubmit(onSubmit)}
-        />
+        >
+          <Text style={styles.submitText}>Add my child! 💗</Text>
+        </TouchableOpacity>
 
-          {/* popup for successfully submitted form */}
+          {/* Popup for successfully submitted form */}
           <View style={styles.centeredView}>
             <Modal
               animationType="slide"
@@ -312,6 +333,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 20,
     marginBottom: 10,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
@@ -327,6 +352,7 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
+    borderColor: "white",
     padding: 10,
   },
   addtext: {
@@ -364,11 +390,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: "center",
     marginTop: 40,
+    alignSelf: "center",
   },
   submitButtonOutline: {
     marginTop: 5,
     borderColor: "white",
     borderWidth: 2,
     marginBottom: 50,
+  },
+  submitText: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });

@@ -9,9 +9,6 @@ import {
   Image,
 } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import Position from "react-native/Libraries/Components/Touchable/Position";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -29,8 +26,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>🌸 Welcome to Pet Central!🌸</Text>
-      <Text style={[styles.headerText, styles.headerSpace]}>
+      <Text style={styles.headerText}>Welcome to</Text>
+      <Text style={styles.headerText}>🌸Pet Central!🌸</Text>
+      <Text style={[styles.headerTextAgain, styles.headerSpace]}>
         Manage your fur children here
       </Text>
 
@@ -123,6 +121,16 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 40,
+    fontWeight: "700",
+    color: "black",
+    // fontFamily: "sans-serif",
+    marginTop: 20,
+    textAlign: "center",
+    backgroundColor: "white",
+    borderRadius: 20,
+  },
+  headerTextAgain: {
+    fontSize: 24,
     fontWeight: "700",
     color: "black",
     // fontFamily: "sans-serif",

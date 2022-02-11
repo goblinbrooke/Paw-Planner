@@ -4,7 +4,6 @@ import {
   View,
   FlatList,
   StyleSheet,
-  Button,
   Text,
   ActivityIndicator,
   TouchableOpacity,
@@ -36,6 +35,8 @@ function PetsListScreen() {
   };
 
   const navigation = useNavigation();
+  
+  // Back to home
   const handleLogoClicked = () => {
     console.log("button pressed");
     navigation.navigate("Home");
@@ -97,7 +98,7 @@ function PetsListScreen() {
           data={data.data}
           renderItem={({ item }) => (
             <View>
-              <Button
+              <TouchableOpacity
                 title={item.name}
                 style={styles.item}
                 onPress={() => {
@@ -106,7 +107,7 @@ function PetsListScreen() {
                 }}
               >
                 {item.name}
-              </Button>
+              </TouchableOpacity>
             </View>
           )}
         />
