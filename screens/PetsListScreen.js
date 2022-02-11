@@ -54,7 +54,6 @@ function PetsListScreen() {
   // get all pets for a specific user
   const handlePets = async () => {
     const userId = getCurrentUser();
-    console.log(userId);
 
     // database endpoint
     const petsEndpoint = `https://paw-planner-default-rtdb.firebaseio.com/user/${userId}/pets.json`;
