@@ -1,21 +1,31 @@
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Text, Image, View, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import {
+  Text,
+  Image,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import App, { PetData } from "../App";
 
-function PetScreen() {
+function PetScreen({ route, navigation }) {
   // useContext from App.js
   const data = useContext(PetData);
+
+  const petObject = route.params;
 
   // Back to home
   const handleLogoClicked = () => {
     navigation.replace("HomeScreen");
   };
 
-  const deleteRequest = (petId) => {
+  const deleteRequest = () => {
     fetch(
-      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/" + petId,
+      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/" +
+        petObject.petId,
       {
         method: "DELETE",
       }
@@ -23,7 +33,7 @@ function PetScreen() {
     // toggleModal();
   };
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   return (
     <ScrollView>
@@ -31,26 +41,27 @@ function PetScreen() {
         <View style={styles.container}>
           <Image
             style={styles.image}
-            source={{ uri: data.data.imageUri }}
+            source={{ uri: petObject.imageUri }}
             style={{ width: 200, height: 200 }}
           />
         </View>
-        <Text style={styles.petInfo}>Pet name: {data.data.name}</Text>
-        <Text style={styles.petInfo}>Pet age: {data.data.age}</Text>
-        <Text style={styles.petInfo}>Pet birthday: {data.data.birthday}</Text>
-        <Text style={styles.petInfo}>Pet microchip: {data.data.microchip}</Text>
-        <Text style={styles.petInfo}>Pet species: {data.data.species}</Text>
-        <Text style={styles.petInfo}>Pet breed: {data.data.breed}</Text>
-        <Text style={styles.petInfo}>Pet coloring: {data.data.coloring}</Text>
-        <TouchableOpacity 
-        title={"delete pet"}
-        style={[styles.button, styles.buttonOutlineWhite]}
-        onPress={deleteRequest}>
+        <Text style={styles.petInfo}>Pet name: {petObject.name}</Text>
+        <Text style={styles.petInfo}>Pet age: {petObject.age}</Text>
+        <Text style={styles.petInfo}>Pet birthday: {petObject.birthday}</Text>
+        <Text style={styles.petInfo}>Pet microchip: {petObject.microchip}</Text>
+        <Text style={styles.petInfo}>Pet species: {petObject.species}</Text>
+        <Text style={styles.petInfo}>Pet breed: {petObject.breed}</Text>
+        <Text style={styles.petInfo}>Pet coloring: {petObject.coloring}</Text>
+        <TouchableOpacity
+          title={"delete pet"}
+          style={[styles.button, styles.buttonOutlineWhite]}
+          onPress={deleteRequest}
+        >
           <Text style={styles.buttonText}>Remove pet</Text>
         </TouchableOpacity>
 
-      {/* Logo */}
-      <TouchableOpacity
+        {/* Logo */}
+        <TouchableOpacity
           onPress={handleLogoClicked}
           style={styles.logoContainer}
         >
@@ -62,7 +73,6 @@ function PetScreen() {
             <Text style={styles.logoText}>💗HOME💗</Text>
           </View>
         </TouchableOpacity>
-
       </SafeAreaView>
     </ScrollView>
   );

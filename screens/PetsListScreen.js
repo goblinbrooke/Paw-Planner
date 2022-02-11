@@ -19,6 +19,7 @@ function PetsListScreen() {
   // state variables
   const [isLoading, setLoading] = useState(true);
   const [petsList, setPetsList] = useState();
+
   const data = useContext(PetData);
 
   // helper functions
@@ -38,17 +39,18 @@ function PetsListScreen() {
     handlePets();
   }, []);
 
-  const dataList = (data) => {
-    const petData = [];
-    for (let pet in data) {
-      petData.push(data[pet]);
+  const dataList = (json) => {
+    const petsList = [];
+    for (let petId in json) {
+      petsList.push(json[petId]);
+      console.log("WE ARE HERE", json[petId]);
     }
-    return petData;
+    return petsList;
   };
 
-  const handlePetClicked = () => {
+  const handlePetClicked = (petObject) => {
     console.log("button pressed");
-    navigation.replace("PetScreen");
+    navigation.push("PetScreen", petObject);
   };
 
   // get all pets for a specific user
@@ -74,9 +76,9 @@ function PetsListScreen() {
   };
 
   // Get Request for Pet Data
-  const handlePet = async () => {
+  const handlePet = async (petObject) => {
     const userId = getCurrentUser();
-    // const petId = how do we get the petId??
+    const petId = petObject.petId;
 
     // database endpoint
     const petEndpoint = `https://paw-planner-default-rtdb.firebaseio.com/user/${userId}/pets/${petId}.json`;
@@ -115,8 +117,8 @@ function PetsListScreen() {
               title={item.name}
               style={styles.item}
               onPress={() => {
-                handlePetClicked();
-                handlePet();
+                handlePetClicked(item);
+                handlePet(item);
               }}
             >
               <Text>{item.name}</Text>
