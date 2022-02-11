@@ -19,7 +19,7 @@ function PetScreen({ route, navigation }) {
 
   // Back to home
   const handleLogoClicked = () => {
-    navigation.replace("HomeScreen");
+    navigation.replace("Home");
   };
 
   const deleteRequest = () => {
