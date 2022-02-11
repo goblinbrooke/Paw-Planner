@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     fontSize: 24,
     color: "white",
+    fontStyle: "bold",
   },
   logoContainer: {
     flex: 1,
