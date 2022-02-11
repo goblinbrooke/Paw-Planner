@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import uuid from "react-native-uuid";
 import PropTypes from "prop-types";
 import {
   Image,
@@ -28,8 +29,10 @@ export default function UploadImage(props) {
         return;
       }
 
+      const imageId = uuid.v4();
+
       const storage = getStorage();
-      const pathReference = ref(storage, "images/pet.jpg");
+      const pathReference = ref(storage, `images/${imageId}.jpg`);
 
       console.log("This is the pathReference: ", JSON.stringify(pathReference));
 
@@ -151,10 +154,14 @@ export default function UploadImage(props) {
       </View>
 
       {/* Upload Photo Button */}
-      <TouchableOpacity 
-      style={[imageUploaderStyles.button, imageUploaderStyles.buttonOutlineWhite]}
-      title="upload" 
-      onPress={uploadFile}>
+      <TouchableOpacity
+        style={[
+          imageUploaderStyles.button,
+          imageUploaderStyles.buttonOutlineWhite,
+        ]}
+        title="upload"
+        onPress={uploadFile}
+      >
         <Text style={imageUploaderStyles.buttonText}>Say "Cheese"! 📸</Text>
       </TouchableOpacity>
     </View>
