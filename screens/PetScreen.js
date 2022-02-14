@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
 import {
   Text,
   Image,
@@ -22,15 +23,31 @@ function PetScreen({ route, navigation }) {
     navigation.replace("Home");
   };
 
+  // helper functions
+  const getCurrentUser = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    return user.uid;
+  };
+  // delete pet
   const deleteRequest = () => {
-    fetch(
-      "https://paw-planner-default-rtdb.firebaseio.com/user/123/pets/" +
-        petObject.petId,
-      {
+    const userId = getCurrentUser(); // get current user id
+    const petId = petObject.petId; // get pet id
+
+    // database endpoint
+    const petEndpoint = `https://paw-planner-default-rtdb.firebaseio.com/user/${userId}/pets/${petId}.json`;
+    try {
+      fetch(petEndpoint, {
         method: "DELETE",
-      }
-    ).then(console.log("pet deleted!"));
-    // toggleModal();
+        headers: { "Content-Type": "application/json" },
+      })
+        .then(console.log("delete button pressed"))
+        .then(navigation.replace("Home"));
+      console.log("delete button pressed");
+    } catch (error) {
+      console.log("There is an error!");
+      console.error(error);
+    }
   };
 
   return (
