@@ -122,7 +122,9 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 20,
     alignItems: "center",
+    alignSelf: "center",
     marginBottom: 10,
+    marginTop: 10,
   },
   buttonOutlineWhite: {
     marginTop: 5,

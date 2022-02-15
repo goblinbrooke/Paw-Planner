@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   item: {
-    marginTop: 10,
     padding: 10,
     backgroundColor: "rgb(190, 225, 230)",
     borderRadius: 20,
