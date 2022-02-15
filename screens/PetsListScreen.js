@@ -95,6 +95,9 @@ function PetsListScreen() {
     }
   };
 
+
+
+
   return (
     <View style={styles.container}>
       {/* Currently logged in */}
@@ -187,7 +190,6 @@ const styles = StyleSheet.create({
     color: "black",
     left: 300,
     marginBottom: 20,
-    resizeMode: "contain",
   },
   textStyle: {
     fontSize: 20,

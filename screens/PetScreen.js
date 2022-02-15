@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "rgb(250, 210, 225)",
-    width: "100%",
+    width: "60%",
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: "center",
     marginBottom: 10,
   },
